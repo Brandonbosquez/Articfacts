@@ -1,0 +1,130 @@
+html, body{
+ margin : 0 ;
+ padding: 0;
+ font-family: 'Press Start 2P', cursive;
+ background-color:lightblue;
+
+}
+
+/* VARIABLES */
+:root{
+ --common-color: #9AA6B1 /*#AAAAAA*/ /*#BEBEBE*/;
+ --rare-color:#A6ECA8;
+ --special-color: #BEA9DF;
+ --ice-color: #47ABFF;
+ --dark-grey: #2E2E2E;
+}
+
+
+/* UTILITIES */
+.container{
+ width: 90%;
+ margin: auto;
+}
+.button{
+ display: block;
+ padding: 1.5rem 2.5rem;
+ margin: 1rem;
+ text-decoration: none;
+ background-color: var(--common-color);
+ color: black;
+ text-align: center;
+ border: black 5px;
+}
+.flex-wrap {
+ display: flex;
+ flex-wrap: wrap;
+}
+.space-evenly {
+ justify-content: space-evenly;
+}
+#mapita {
+ width: 100%;
+ height: auto;
+}
+.responsive-img{
+ width: 100%;
+ height: auto;
+}
+
+/* APP SPECIFIC */
+.page-header{
+ background-color: var(--ice-color);
+ color: white;
+}
+.page-title , .logo {
+ margin : 0 ;
+ text-align: center;
+}
+ul{
+ list-style-type: none;
+ padding: 0;
+ margin: 0;
+}
+#logo{
+ font-size: 2rem;
+ color: white;
+ background-color: midnightblue;
+ padding: 2rem 3rem;
+}
+#map {
+ width:30%;
+}
+#game-area{
+ width: 70%;
+}
+.box{
+ width: 100%;
+ padding: 1rem;
+}
+#status{
+ width: 100%;
+ padding: 0;
+ padding-left: 1rem;
+ margin: auto;
+ background-color: rgba(170, 170, 170,0.4);
+}
+#status h2{
+ font-size: 1rem;
+}
+.box table{
+ text-align: left;
+ width: 100%;
+}
+#destinations{
+ width:100%;
+ margin: auto;
+ text-align: center;
+}
+.destination{
+ width:23%;
+ margin:0;
+ text-align: center;
+ display: inline-block;
+ background-color: var(--common-color);
+ height: 100%;
+}
+figure{
+ width: 100%;
+ margin: auto;
+}
+figcaption{
+ font-size: 80%;
+}
+#icon{
+ width:85%;
+ padding-bottom: 0.5rem;
+}
+
+.destination td{
+ width:50%;
+ font-size: 0.8rem;
+ padding-bottom: 2%;
+ padding-left: 2%;
+}
+p{
+ font-size: 90%;
+width: 90%;
+ margin: auto;
+ padding: 1rem 0rem 1rem 0rem;
+}

@@ -1,6 +1,10 @@
 html{ font-family: 'Press Start 2P', cursive;
  background-color: #472e00;
 }
+ /* ADECUACIONES PARA BOTONES COPIADAS */
+
+
+
 h1 {
     font-size: 72px;
     background: -webkit-linear-gradient(#FB4321, #2B1055);
@@ -10,31 +14,34 @@ h1 {
     padding: 5rem;
 }
 ul {
-    width: 20rem;
-      margin: 0;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  -ms-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
+    position: absolute;
+    padding-top: 2rem;
+    padding-left: 0px;
+     top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    text-align: center;
 
 }
+
 .button1 {background-color: #d60049;}
+
 button {
-    display: flex;
-    width: 75%;
+    width: 50%;
     font-family: 'Press Start 2P', cursive;
-    border: none;
+    font-size: 30px;
+    border-width: 6px;
     color: white;
   background-color: #af1e03;
   padding: 16px 32px;
-    font-size: 20px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  margin: 1rem 3rem;
+  margin: 1.5rem 3rem;
   transition-duration: 0.4s;
   cursor: pointer;
-    border-radius: 10px;
-    border: 2px solid #470018;
+
 }
+
+
