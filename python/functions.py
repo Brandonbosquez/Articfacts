@@ -89,18 +89,22 @@ def locations_available_function():
 
     return ready_locations
 
-locations_available_list = []
 locations_available_list = locations_available_function()
 print(locations_available_list)
 
-
+#FAILED CLASS
+"""""
 class Town():
     def __init__(self,name,id,artifact,rarity,description,latitude,longitude):
         self.name = name
         self.artifact = [id,artifact,rarity,description]
         self.position = [latitude,longitude]
-
-ready_locations = []
+ready_locations_list = []
 for i in range(options):
-    x = Town(locations_available_list[i][0],locations_available_list[i][1][0],locations_available_list[i][1][1],locations_available_list[i][1][2],locations_available_list[i][1][3],locations_available_list[i][2][0],locations_available_list[i][2][1])
-    ready_locations.append(x)
+    ready_locations_list = Town(locations_available_list[i][0], locations_available_list[i][1][0], locations_available_list[i][1][1], locations_available_list[i][1][2],locations_available_list[i][1][3],locations_available_list[i][2][0],locations_available_list[i][2][1])
+"""""
+print("4 DE PRUEBA")
+pruebitas = []
+pruebitas = random.sample(locations_available_list,4)
+print(pruebitas, sep = "\n")
+##FUNTIONS DURING THE GAME
