@@ -16,10 +16,11 @@ const currentLocation = document.querySelector('#location');
 async function fourOptions(){
     console.log('Retrieving 4 options from server');
     /*Access-Control-Allow-Origin: 'http://localhost:63342'*/
+    let jsonData;
     const url = 'http://127.0.0.1:5000/fouroptions';
     try {
         const response =  await fetch(url);
-        const jsonData =  await response.json();
+        jsonData =  await response.json();
         //document.getElementById('artifact-name2').innerText = jsonData['option2']['name'];
         console.log('fetch dones');}
     catch (error){
@@ -27,10 +28,10 @@ async function fourOptions(){
     } finally {
         console.log(response['option1'])
          console.log('asynchronous load complete');
-
+    return jsonData.option2;
     }
 }
 
 const fourOption = fourOptions()
-document.getElementById('town2-name').innerText = 'Buenos dias';//fourOption['option2']['name'];
+document.getElementById('town2-name').innerText = fourOption.town ;//fourOption['option2']['name'];
 
