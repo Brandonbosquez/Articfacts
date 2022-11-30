@@ -1,9 +1,9 @@
-#INICIO DE PROYECTO FINAL PROCEDURAL PROGRAMMING
-#funciones que arman la lógica del juego
+import random
 
+from flask import Flask, request
 import mysql.connector
-import geopy
-import time, os, importlib, random
+from flask_cors import CORS
+
 connection = mysql.connector.connect(
     host='127.0.0.1',
     port=3306,
@@ -13,7 +13,6 @@ connection = mysql.connector.connect(
     autocommit=True
 )
 options = 31
-current_location = "Helsinki"
 def locations_list_function():
     sql = "SELECT town FROM airports"
     cursor = connection.cursor()
@@ -36,9 +35,6 @@ def artifacts_list_function():
         artifacts.append(result[x][0])
     return artifacts
 
-
-#print(random.sample(artifacts_list,options))
-#Randomize what artifact is contained in each location and store in database
 def random_artifacts_function():
     artifacts_list = artifacts_list_function()
     locations_list = locations_list_function()
@@ -53,8 +49,6 @@ def random_artifacts_function():
 random_artifacts_list = []
 random_artifacts_list = random_artifacts_function()
 
-
-#I need to collect all the information to create an object for each location available :(
 def locations_available_function():
     locations_list = []
     locations_list = random_artifacts_function()[1]
@@ -73,7 +67,7 @@ def locations_available_function():
         #test print
         #print(locations_available_list)
         ready_locations.append(locations_available_list)
-    print(ready_locations)
+
     for i in range(options):
         sqlo = "SELECT name, rarity,description FROM artifacts WHERE id ='"+str(ready_locations[i][1][0])+"';"
         cursor = connection.cursor()
@@ -84,40 +78,71 @@ def locations_available_function():
         ready_locations[i][1][1] = resultado[0][0]
         ready_locations[i][1][2] = resultado[0][1]
         ready_locations[i][1][3] = resultado[0][2]
-        print(ready_locations[i])
+
 
 
     return ready_locations
 
-locations_available_list = locations_available_function()
-print(locations_available_list)
-
-#FAILED CLASS
-"""""
-class Town():
-    def __init__(self,name,id,artifact,rarity,description,latitude,longitude):
-        self.name = name
-        self.artifact = [id,artifact,rarity,description]
-        self.position = [latitude,longitude]
-ready_locations_list = []
-for i in range(options):
-    ready_locations_list = Town(locations_available_list[i][0], locations_available_list[i][1][0], locations_available_list[i][1][1], locations_available_list[i][1][2],locations_available_list[i][1][3],locations_available_list[i][2][0],locations_available_list[i][2][1])
-"""""
-print("4 DE PRUEBA")
-pruebitas = []
-pruebitas = random.sample(locations_available_list,4)
-print(pruebitas, sep = "\n")
-##FUNTIONS DURING THE GAME
-
-
-from geopy import distance
-
-#TESTING
-"""tampere = [61.414101,23.604401]
-helsinki = [60.3172,24.963301]"""
 def calculate_distance(current_location,other_location):
     distancia = int(distance.distance(current_location,other_location).km)
     print(distancia)
     return distancia
 
-#calculate_location(tampere,helsinki)
+
+all_options = locations_available_function()
+pruebitas = []
+pruebitas = random.sample(all_options,4)
+#print(pruebitas)
+start_location = ['Helsinki',[60.1699,24.9384]]
+
+app = Flask(__name__)
+cors = CORS(app)
+app.config['CORS_HEADERS'] = 'Content-Type'
+
+@app.route('/fouroptions')
+def four_options():
+    four_options = random.sample(all_options, 4)
+    response = {
+        'option1': {
+            'town': four_options[0][0],
+            'id': four_options[0][1][0],
+            'artifact': four_options[0][1][1],
+            'rarity': four_options[0][1][2],
+            'description': four_options[0][1][3],
+            'pos': [four_options[0][2][0], four_options[0][2][1]]
+        },
+        'option2' :  {
+            'town' : four_options[1][0],
+            'id' : four_options[1][1][0],
+            'artifact' : four_options[1][1][1],
+            'rarity' : four_options[1][1][2],
+            'description' : four_options[1][1][3],
+            'pos' : [four_options[1][2][0],four_options[1][2][1]]
+        },
+        'option2': {
+            'town': four_options[2][0],
+            'id': four_options[2][1][0],
+            'artifact': four_options[2][1][1],
+            'rarity': four_options[2][1][2],
+            'description': four_options[2][1][3],
+            'pos': [four_options[2][2][0], four_options[2][2][1]]
+        },
+        'option3': {
+            'town': four_options[3][0],
+            'id': four_options[3][1][0],
+            'artifact': four_options[3][1][1],
+            'rarity': four_options[3][1][2],
+            'description': four_options[3][1][3],
+            'pos': [four_options[3][2][0], four_options[3][2][1]]
+        }
+    }
+    #response['option1']['name']
+    return response
+
+
+
+
+
+if __name__ == '__main__':
+    app.run(use_reloader=True, host='127.0.0.1', port=5000)
+    app.debug = True

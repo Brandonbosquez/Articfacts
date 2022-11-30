@@ -1,3 +1,4 @@
+#SEÑOR JESUCRISTO BENDICE ESTE CÓDIGO
 #GAME RUNS HERE
 import functions
 import player

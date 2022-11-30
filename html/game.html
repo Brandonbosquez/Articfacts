@@ -5,6 +5,13 @@
     <title>ARTICFACTS</title>
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/stylegame.css">
+     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+     integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
+     crossorigin=""/>
+     <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+     integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
+     crossorigin=""></script>
+    <script src="javascript/game.js" defer > </script>
 </head>
 <body>
 
@@ -33,7 +40,7 @@
 
 <main class="flex-wrap">
     <div id ="map">
-        <img class="responsive-img" id="mapita" src="img/mapa.png" alt="map of finland">
+        <!--<img class="responsive-img" id="mapita" src="img/mapa.png" alt="map of finland">-->
     </div>
     <div id="game-area">
         <section class="box" id="status">
@@ -57,7 +64,7 @@
             <header>
                 <h2>DESTINATIONS</h2>
             </header>
-            <div class="destination">
+            <div class="destination" id="option1">
                 <h3 class="town-name"><span class="town">OULU</span></h3>
                 <figure >
                     <h4><spa>Fish Bones</spa></h4>
@@ -76,10 +83,10 @@
                     </tr>
                 </table>
             </div>
-            <div class="destination">
-                <h3 class="town-name"><span class="town">OULU</span></h3>
+            <div class="destination" id="option2">
+                <h3 class="town-name"><span id= "town2-name" class="town">OULU</span></h3>
                 <figure>
-                    <h4><spa>Fish Bones</spa></h4>
+                    <h4><spa id="artifact-name2">Fish Bones</spa></h4>
                     <img class="responsive-img" id="icon"  src="img/icons/bone.jpg" alt="artifact icon">
                     <figcaption>Rarity: <span id="rarity">Common</span></figcaption>
                 </figure>
@@ -95,18 +102,18 @@
                     </tr>
                 </table>
             </div>
-            <div class="destination">
-                <h3 class="town-name"><span class="town">OULU</span></h3>
+            <div class="destination" id="option3">
+                <h3 class="town-name"><span class="town">JYVÄSKYLÄ</span></h3>
                 <figure>
-                    <h4><spa>Fish Bones</spa></h4>
-                    <img class="responsive-img" id="icon"  src="img/icons/bone.jpg" alt="artifact icon">
-                    <figcaption>Rarity: <span id="rarity">Common</span></figcaption>
+                    <h4><spa>Green Book</spa></h4>
+                    <img class="responsive-img" id="icon"  src="img/icons/206.jpg" alt="artifact icon">
+                    <figcaption>Rarity: <span id="rarity">Rare</span></figcaption>
                 </figure>
-                <p>A little fishy got fossilized</p>
+                <p>Some book that is green</p>
                 <table>
                     <tr>
                         <td>DISTANCE: </td>
-                        <td class="distance"><span>500 KM</span> </td>
+                        <td class="distance"><span>300 KM</span> </td>
                     </tr>
                     <tr>
                         <td>FUEL REQUIRED: </td>
@@ -114,7 +121,7 @@
                     </tr>
                 </table>
             </div>
-            <div class="destination">
+            <div class="destination" id="option4">
                 <h3 class="town-name"><span class="town">OULU</span></h3>
                 <figure>
                     <h4><spa>Fish Bones</spa></h4>

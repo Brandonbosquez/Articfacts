@@ -22,4 +22,9 @@ class Player():
         self.pilot = "Jean"
         self.fuel = 120
 
+    def move_location(self,new_location):
+        self.current_location = new_location
+
+
+
 

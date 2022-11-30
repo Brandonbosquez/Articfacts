@@ -96,6 +96,9 @@ ul{
  margin: auto;
  text-align: center;
 }
+#option3{
+ background-color: var(--rare-color);
+}
 .destination{
  width:23%;
  margin:0;
