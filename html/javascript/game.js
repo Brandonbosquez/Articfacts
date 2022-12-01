@@ -13,7 +13,7 @@ const selectedUsername = prompt('Select a Username','Type username');
 const username = document.querySelector('#player');
 username.innerHTML = selectedUsername;
 
-const currentLocation = document.querySelector('#location');
+
 
 //FUNCIÓN PARA HACER EL FETCH DEL SERVIDOR
 async function getData(url){
@@ -54,39 +54,39 @@ async function getTown1(url){
     const marker = L.marker([data.option1.lat, data.option1.long]).addTo(map);
     marker.bindPopup(data.option1.town);
     }
-    async function getTown2(url){
-  const response = await fetch(url);
-  if (!response.ok) throw new Error('Invalid server input.');
-    const data = await response.json();
-    console.log(data.option2.town);
-    const panel = document.getElementById("option2");
-    panel.addEventListener("click", turn);
-    //panel.querySelector('#ciudaduno').innerHTML = data.option1.town;
-    document.getElementsByClassName("town").item(1).innerHTML = data.option2.town ;
-    document.getElementById('icon1').setAttribute("src","img/icons/204.jpg");
-    document.getElementsByClassName("artefacto").item(1).innerHTML = data.option2.artifact;
-    document.getElementsByClassName("rareza").item(1).innerHTML = data.option2.rarity;
-    document.getElementsByClassName("descripcion").item(1).innerHTML = data.option2.description;
-    const marker = L.marker([data.option2.lat, data.option2.long]).addTo(map);
-    marker.bindPopup(data.option2.town);
-    }
-     async function getTown3(url){
-  const response = await fetch(url);
-  if (!response.ok) throw new Error('Invalid server input.');
-    const data = await response.json();
-    console.log(data.option2.town);
-    const panel = document.getElementById("option3");
-    panel.addEventListener("click", turn);
-    //panel.querySelector('#ciudaduno').innerHTML = data.option1.town;
-    document.getElementsByClassName("town").item(2).innerHTML = data.option3.town ;
-    document.getElementById('icon1').setAttribute("src","img/icons/204.jpg");
-    document.getElementsByClassName("artefacto").item(2).innerHTML = data.option3.artifact;
-    document.getElementsByClassName("rareza").item(2).innerHTML = data.option3.rarity;
-    document.getElementsByClassName("descripcion").item(2).innerHTML = data.option3.description;
-    const marker = L.marker([data.option3.lat, data.option3.long]).addTo(map);
-    marker.bindPopup(data.option3.town);
-    }
-    async function getTown4(url){
+async function getTown2(url){
+const response = await fetch(url);
+if (!response.ok) throw new Error('Invalid server input.');
+const data = await response.json();
+console.log(data.option2.town);
+const panel = document.getElementById("option2");
+panel.addEventListener("click", turn);
+//panel.querySelector('#ciudaduno').innerHTML = data.option1.town;
+document.getElementsByClassName("town").item(1).innerHTML = data.option2.town ;
+document.getElementById('icon1').setAttribute("src","img/icons/204.jpg");
+document.getElementsByClassName("artefacto").item(1).innerHTML = data.option2.artifact;
+document.getElementsByClassName("rareza").item(1).innerHTML = data.option2.rarity;
+document.getElementsByClassName("descripcion").item(1).innerHTML = data.option2.description;
+const marker = L.marker([data.option2.lat, data.option2.long]).addTo(map);
+marker.bindPopup(data.option2.town);
+}
+async function getTown3(url){
+const response = await fetch(url);
+if (!response.ok) throw new Error('Invalid server input.');
+const data = await response.json();
+console.log(data.option2.town);
+const panel = document.getElementById("option3");
+panel.addEventListener("click", turn);
+//panel.querySelector('#ciudaduno').innerHTML = data.option1.town;
+document.getElementsByClassName("town").item(2).innerHTML = data.option3.town ;
+document.getElementById('icon1').setAttribute("src","img/icons/204.jpg");
+document.getElementsByClassName("artefacto").item(2).innerHTML = data.option3.artifact;
+document.getElementsByClassName("rareza").item(2).innerHTML = data.option3.rarity;
+document.getElementsByClassName("descripcion").item(2).innerHTML = data.option3.description;
+const marker = L.marker([data.option3.lat, data.option3.long]).addTo(map);
+marker.bindPopup(data.option3.town);
+}
+async function getTown4(url){
   const response = await fetch(url);
   if (!response.ok) throw new Error('Invalid server input.');
     const data = await response.json();
@@ -103,7 +103,14 @@ async function getTown1(url){
     marker.bindPopup(data.option4.town);
     }
 
-    var days = 20 ;
+
+
+async function changeLocation(newLocation){
+    let currentLocation = "";
+    currentLocation = newLocation;
+}
+
+var days = 20 ;
 async function dayPass(){
     days -= 1;
     document.getElementById('days').innerHTML = days;
@@ -111,12 +118,18 @@ async function dayPass(){
 async  function turn() {
    dayPass();
     const url = 'http://127.0.0.1:5000/fouroptions';
+    //const response = await fetch(url);
+    //const data = await response.json();
     getTown1(url);
     getTown2(url);
     getTown3(url);
     getTown4(url);
     L.map('map').setView([65.0121, 25.4651], 10)
 }
+
+//let currentLocation = {"location":"Helsinki","lat":60.1699, "long":24.9384};
+document.getElementById('location').innerHTML = 'Helsinki';
+
 turn();
 
 //let selection = getData(url);
