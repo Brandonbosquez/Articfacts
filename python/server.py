@@ -95,49 +95,70 @@ pruebitas = random.sample(all_options,4)
 #print(pruebitas)
 start_location = ['Helsinki',[60.1699,24.9384]]
 
-app = Flask(__name__)
-cors = CORS(app)
-app.config['CORS_HEADERS'] = 'Content-Type'
 
-@app.route('/fouroptions')
-def four_options():
+"""def four_options():
     four_options = random.sample(all_options, 4)
-    response = {
-        'option1': {
+    response1 = {
             'town': four_options[0][0],
             'id': four_options[0][1][0],
             'artifact': four_options[0][1][1],
             'rarity': four_options[0][1][2],
             'description': four_options[0][1][3],
-            'pos': [four_options[0][2][0], four_options[0][2][1]]
+            'lat': four_options[0][2][0],
+            'long': four_options[0][2][1]
+        }
+    return response1
+
+nombres = four_options()
+print(nombres)"""
+
+app = Flask(__name__)
+cors = CORS(app)
+app.config['CORS_HEADERS'] = 'Content-Type'
+
+
+@app.route('/fouroptions')
+def four_options():
+    four_options = random.sample(all_options, 4)
+    response1 = { "option1": {
+            "town": four_options[0][0],
+            "id": four_options[0][1][0],
+            "artifact": four_options[0][1][1],
+            "rarity": four_options[0][1][2],
+            "description": four_options[0][1][3],
+            "lat": four_options[0][2][0],
+            "long": four_options[0][2][1]
+        }
+        ,"option2" :  {
+            "town" : four_options[1][0],
+            "id" : four_options[1][1][0],
+            "artifact" : four_options[1][1][1],
+            "rarity" : four_options[1][1][2],
+            "description" : four_options[1][1][3],
+            "lat": four_options[1][2][0],
+            "long": four_options[1][2][1]
         },
-        'option2' :  {
-            'town' : four_options[1][0],
-            'id' : four_options[1][1][0],
-            'artifact' : four_options[1][1][1],
-            'rarity' : four_options[1][1][2],
-            'description' : four_options[1][1][3],
-            'pos' : [four_options[1][2][0],four_options[1][2][1]]
+        "option3": {
+            "town": four_options[2][0],
+            "id": four_options[2][1][0],
+            "artifact": four_options[2][1][1],
+            "rarity": four_options[2][1][2],
+            "description": four_options[2][1][3],
+            "lat": four_options[2][2][0],
+            "long": four_options[2][2][1]
         },
-        'option2': {
-            'town': four_options[2][0],
-            'id': four_options[2][1][0],
-            'artifact': four_options[2][1][1],
-            'rarity': four_options[2][1][2],
-            'description': four_options[2][1][3],
-            'pos': [four_options[2][2][0], four_options[2][2][1]]
-        },
-        'option3': {
-            'town': four_options[3][0],
-            'id': four_options[3][1][0],
-            'artifact': four_options[3][1][1],
-            'rarity': four_options[3][1][2],
-            'description': four_options[3][1][3],
-            'pos': [four_options[3][2][0], four_options[3][2][1]]
+        "option4": {
+            "town": four_options[3][0],
+            "id": four_options[3][1][0],
+            "artifact": four_options[3][1][1],
+            "rarity": four_options[3][1][2],
+            "description": four_options[3][1][3],
+            "lat": four_options[3][2][0],
+            "long": four_options[3][2][1]
         }
     }
     #response['option1']['name']
-    return response
+    return response1
 
 
 

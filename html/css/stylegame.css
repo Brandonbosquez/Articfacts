@@ -43,8 +43,9 @@ html, body{
  height: auto;
 }
 .responsive-img{
- width: 100%;
  height: auto;
+  width:80%;
+ padding-bottom: 0.5rem;
 }
 
 /* APP SPECIFIC */
@@ -105,7 +106,7 @@ ul{
  text-align: center;
  display: inline-block;
  background-color: var(--common-color);
- height: 100%;
+ height: 500px;
 }
 figure{
  width: 100%;
@@ -124,6 +125,7 @@ figcaption{
  font-size: 0.8rem;
  padding-bottom: 2%;
  padding-left: 2%;
+ align-self: baseline;
 }
 p{
  font-size: 90%;

@@ -121,3 +121,11 @@ def calculate_distance(current_location,other_location):
     return distancia
 
 #calculate_location(tampere,helsinki)
+
+"""if(data.option1.rarity === "rare"){
+        document.body.style.backgroundColor = #A6ECA8;
+    }
+    else {
+        console.log("no color change")
+    }
+    return data.value;} """
