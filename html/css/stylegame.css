@@ -2,7 +2,11 @@ html, body{
  margin : 0 ;
  padding: 0;
  font-family: 'Press Start 2P', cursive;
- background-color:lightblue;
+ /*background-color:lightblue;*/
+/* background-image: url("../img/otros/fondo.jpg");*/
+  background-color:lightblue;
+ background-image: url("../img/otros/fondo_tile.jpg");
+ background-repeat: repeat ;
 
 }
 
@@ -20,6 +24,7 @@ html, body{
 .container{
  width: 90%;
  margin: auto;
+
 }
 .button{
  display: block;
@@ -107,6 +112,7 @@ ul{
  display: inline-block;
  background-color: var(--common-color);
  height: 500px;
+ vertical-align: top;
 }
 figure{
  width: 100%;
@@ -132,4 +138,16 @@ p{
 width: 90%;
  margin: auto;
  padding: 1rem 0rem 1rem 0rem;
+}
+p.descripcion{
+ padding-bottom: 35px;
+}
+.common{
+ background-color: var(--common-color);
+}
+.rare{
+ background-color: var(--rare-color);
+}
+.special{
+ background-color: var(--special-color);
 }
