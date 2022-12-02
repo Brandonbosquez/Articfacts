@@ -37,6 +37,9 @@ html, body{
  border: black 5px;
  box-shadow: 5px 5px 10px 2px rgba(0,0,0,.8);
 }
+.button:hover {
+  filter: brightness(85%);
+}
 .flex-wrap {
  display: flex;
  flex-wrap: wrap;
@@ -113,6 +116,9 @@ ul{
  height: 500px;
  vertical-align: top;
  box-shadow: 5px 5px 10px 2px rgba(0,0,0,.8);
+}
+.destination:hover {
+  filter: brightness(85%);
 }
 figure{
  width: 100%;
