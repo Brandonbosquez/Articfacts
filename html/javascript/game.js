@@ -4,6 +4,14 @@
 //var map = L.map('map').setView([60.1699,24.9384], 6);
 var map = L.map('map').setView([65.0511, 27.0576], 5);
 
+var hielito = L.icon({
+    iconUrl: 'img/hielito.png',
+
+    iconSize:     [25, 22], // size of the icon
+    iconAnchor:   [10, 10], // point of the icon which will correspond to marker's location
+    popupAnchor:  [1, -5] // point from which the popup should open relative to the iconAnchor
+});
+
 L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19,
     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
@@ -61,9 +69,7 @@ async function getTown1(url){
         document.querySelector("#option1").setAttribute("class","destination common");
     }
     document.getElementsByClassName("descripcion").item(0).innerHTML = data.option1.description;
-    let pos1 = {"lat":data.option1.lat, "long":data.option1.long};
-    console.log(pos1);
-    const marker = L.marker([data.option1.lat, data.option1.long]).addTo(map);
+    const marker = L.marker([data.option1.lat, data.option1.long], {icon: hielito}).addTo(map);
     marker.bindPopup(data.option1.town);
 
     const panel2 = document.getElementById("option2");
@@ -84,7 +90,7 @@ async function getTown1(url){
     }
     document.getElementsByClassName("descripcion").item(1).innerHTML = data.option2.description;
     let pos2 = {"lat":data.option2.lat, "long":data.option2.long};
-    const marker2 = L.marker([data.option2.lat, data.option2.long]).addTo(map);
+    const marker2 = L.marker([data.option2.lat, data.option2.long], {icon: hielito}).addTo(map);
     marker2.bindPopup(data.option2.town);
 
 
@@ -106,7 +112,7 @@ async function getTown1(url){
     }
     document.getElementsByClassName("descripcion").item(2).innerHTML = data.option3.description;
      let pos3 = {"lat":data.option3.lat, "long":data.option3.long};
-    const marker3 = L.marker([data.option3.lat, data.option3.long]).addTo(map);
+    const marker3 = L.marker([data.option3.lat, data.option3.long], {icon: hielito}).addTo(map);
     marker3.bindPopup(data.option3.town);
 
     const panel4 = document.getElementById("option4");
@@ -128,7 +134,7 @@ async function getTown1(url){
     }
     document.getElementsByClassName("descripcion").item(3).innerHTML = data.option4.description;
     let pos4 = {"lat":data.option4.lat, "long":data.option4.long};
-    const marker4 = L.marker([data.option4.lat, data.option4.long]).addTo(map);
+    const marker4 = L.marker([data.option4.lat, data.option4.long], {icon: hielito}).addTo(map);
     marker4.bindPopup(data.option4.town);
     }
 

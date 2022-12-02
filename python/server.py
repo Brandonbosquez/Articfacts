@@ -3,6 +3,7 @@ import random
 from flask import Flask, request
 import mysql.connector
 from flask_cors import CORS
+from geopy import distance
 
 connection = mysql.connector.connect(
     host='127.0.0.1',
@@ -83,34 +84,22 @@ def locations_available_function():
 
     return ready_locations
 
-def calculate_distance(current_location,other_location):
-    distancia = int(distance.distance(current_location,other_location).km)
+start_location = ['Helsinki',[60.1699,24.9384]]
+current_location = start_location[1]
+
+"""
+def calculate_distance(other_location):
+    distancia = int(distance.geodesic(current_location,other_location).km)
     print(distancia)
-    return distancia
+    return distancia"""
 
 
 all_options = locations_available_function()
 pruebitas = []
 pruebitas = random.sample(all_options,4)
 #print(pruebitas)
-start_location = ['Helsinki',[60.1699,24.9384]]
 
 
-"""def four_options():
-    four_options = random.sample(all_options, 4)
-    response1 = {
-            'town': four_options[0][0],
-            'id': four_options[0][1][0],
-            'artifact': four_options[0][1][1],
-            'rarity': four_options[0][1][2],
-            'description': four_options[0][1][3],
-            'lat': four_options[0][2][0],
-            'long': four_options[0][2][1]
-        }
-    return response1
-
-nombres = four_options()
-print(nombres)"""
 
 app = Flask(__name__)
 cors = CORS(app)
@@ -127,7 +116,8 @@ def four_options():
             "rarity": four_options[0][1][2],
             "description": four_options[0][1][3],
             "lat": four_options[0][2][0],
-            "long": four_options[0][2][1]
+            "long": four_options[0][2][1]#,
+            #"distance": distancia
         }
         ,"option2" :  {
             "town" : four_options[1][0],
@@ -159,6 +149,11 @@ def four_options():
     }
     #response['option1']['name']
     return response1
+"""
+@app.route('/distance/<current>&&<new>')
+def distance(current, new):
+    distance = calculate_distance(current, new)
+    return distance"""
 
 
 
