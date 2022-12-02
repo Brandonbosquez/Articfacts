@@ -47,7 +47,7 @@ async function getTown1(url){
     panel.addEventListener("click", turn);
     //panel.querySelector('#ciudaduno').innerHTML = data.option1.town;
     document.getElementsByClassName("town").item(0).innerHTML = data.option1.town ;
-    document.getElementById('icon1').setAttribute("src","img/icons/204.jpg");
+    document.getElementById('icon1').setAttribute("src",`img/icons/${data.option1.id}.jpg`);
     document.getElementsByClassName("artefacto").item(0).innerHTML = data.option1.artifact;
     document.getElementsByClassName("rareza").item(0).innerHTML = data.option1.rarity;
     console.log(data.option1.rarity);
@@ -69,7 +69,7 @@ async function getTown1(url){
     const panel2 = document.getElementById("option2");
     panel2.addEventListener("click", turn);
     document.getElementsByClassName("town").item(1).innerHTML = data.option2.town ;
-    document.getElementById('icon1').setAttribute("src","img/icons/204.jpg");
+    document.getElementById('icon2').setAttribute("src",`img/icons/${data.option2.id}.jpg`);
     document.getElementsByClassName("artefacto").item(1).innerHTML = data.option2.artifact;
     document.getElementsByClassName("rareza").item(1).innerHTML = data.option2.rarity;
     console.log(data.option2.rarity);
@@ -87,12 +87,11 @@ async function getTown1(url){
     const marker2 = L.marker([data.option2.lat, data.option2.long]).addTo(map);
     marker2.bindPopup(data.option2.town);
 
-    let abo = 204;
+
     const panel3 = document.getElementById("option3");
     panel3.addEventListener("click", turn);
-    //panel.querySelector('#ciudaduno').innerHTML = data.option1.town;
     document.getElementsByClassName("town").item(2).innerHTML = data.option3.town ;
-    document.getElementById('icon3').setAttribute("src",`img/icons/${abo}.jpg`);
+    document.getElementById('icon3').setAttribute("src",`img/icons/${data.option3.id}.jpg`);
     document.getElementsByClassName("artefacto").item(2).innerHTML = data.option3.artifact;
     document.getElementsByClassName("rareza").item(2).innerHTML = data.option3.rarity;
     console.log(data.option3.rarity);
@@ -114,7 +113,7 @@ async function getTown1(url){
     panel4.addEventListener("click", turn);
     //panel.querySelector('#ciudaduno').innerHTML = data.option1.town;
     document.getElementsByClassName("town").item(3).innerHTML = data.option4.town ;
-    document.getElementById('icon1').setAttribute("src","img/icons/204.jpg");
+    document.getElementById('icon4').setAttribute("src",`img/icons/${data.option4.id}.jpg`);
     document.getElementsByClassName("artefacto").item(3).innerHTML = data.option4.artifact;
     document.getElementsByClassName("rareza").item(3).innerHTML = data.option4.rarity;
     console.log(data.option4.rarity);
@@ -133,7 +132,7 @@ async function getTown1(url){
     marker4.bindPopup(data.option4.town);
     }
 
-    /*FUNCIONES QUE PASARON A MEJOR VIDA: DEP
+/*FUNCIONES QUE PASARON A MEJOR VIDA: DEP
 async function getTown2(url){
 const response = await fetch(url);
 if (!response.ok) throw new Error('Invalid server input.');
@@ -201,10 +200,7 @@ async  function turn() {
    dayPass();
     const url = 'http://127.0.0.1:5000/fouroptions';
     getTown1(url);
-    /*getTown2(url);
-    getTown3(url);
-    getTown4(url);*/
-    L.map('map').setView([65.0121, 25.4651], 10)
+    /*L.map('map').setView([65.0121, 25.4651], 10)*/
 }
 
 //let currentLocation = {"location":"Helsinki","lat":60.1699, "long":24.9384};
