@@ -87,11 +87,12 @@ async function getTown1(url){
     const marker2 = L.marker([data.option2.lat, data.option2.long]).addTo(map);
     marker2.bindPopup(data.option2.town);
 
+    let abo = 204;
     const panel3 = document.getElementById("option3");
     panel3.addEventListener("click", turn);
     //panel.querySelector('#ciudaduno').innerHTML = data.option1.town;
     document.getElementsByClassName("town").item(2).innerHTML = data.option3.town ;
-    document.getElementById('icon1').setAttribute("src","img/icons/204.jpg");
+    document.getElementById('icon3').setAttribute("src",`img/icons/${abo}.jpg`);
     document.getElementsByClassName("artefacto").item(2).innerHTML = data.option3.artifact;
     document.getElementsByClassName("rareza").item(2).innerHTML = data.option3.rarity;
     console.log(data.option3.rarity);

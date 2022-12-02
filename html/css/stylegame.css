@@ -125,13 +125,16 @@ figcaption{
  width:85%;
  padding-bottom: 0.5rem;
 }
-
+.destination table{
+ display: block;
+ vertical-align: bottom;
+}
 .destination td{
  width:50%;
  font-size: 0.8rem;
  padding-bottom: 2%;
  padding-left: 2%;
- align-self: baseline;
+ /*align-self: baseline;*/
 }
 p{
  font-size: 90%;
