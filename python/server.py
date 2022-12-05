@@ -89,11 +89,23 @@ def locations_available_function():
 start_location = ['Helsinki',[60.1699,24.9384]]
 current_location = start_location[1]
 
-"""
+
 def calculate_distance(other_location):
-    distancia = int(distance.geodesic(current_location,other_location).km)
+    sql = "select location from scoreboard order by id desc limit 1;"
+    cursor = connection.cursor()
+    cursor.execute(sql)
+    result = cursor.fetchall()
+
+    sql2 = "select latitude_deg, longitude_deg from airports where town ='" + result[0][0] + "' ;"
+    cursor = connection.cursor()
+    cursor.execute(sql2)
+    result2 = cursor.fetchall()
+
+    current_pos = [result2[0][0], result2[0][1]]
+
+    distancia = int(distance.geodesic(current_pos, other_location).km)
     print(distancia)
-    return distancia"""
+    return distancia
 
 
 all_options = locations_available_function()
@@ -118,6 +130,7 @@ def store_name(name):
 @app.route('/fouroptions')
 def four_options():
     four_options = random.sample(all_options, 4)
+    distance1 = calculate_distance([four_options[0][2][0],four_options[0][2][1]])
     response1 = { "option1": {
             "town": four_options[0][0],
             "id": four_options[0][1][0],
@@ -125,8 +138,8 @@ def four_options():
             "rarity": four_options[0][1][2],
             "description": four_options[0][1][3],
             "lat": four_options[0][2][0],
-            "long": four_options[0][2][1]#,
-            #"distance": distancia
+            "long": four_options[0][2][1],
+            "distance": int(distance1)
         }
         ,"option2" :  {
             "town" : four_options[1][0],
@@ -159,9 +172,12 @@ def four_options():
     #response['option1']['name']
     return response1
 
-@app.route('/movelocation/<new>')
-def move(new):
-    current_location = new
+@app.route('/movelocation/<new>/<username>')
+def move(new,username):
+    sql = "UPDATE scoreboard SET location ='" + new + "' WHERE username ='" + username + "' ;"
+    cursor = connection.cursor()
+    cursor.execute(sql)
+    return new, print("location changed in database :D")
 
 """
 @app.route('/distance/<current>&&<new>')

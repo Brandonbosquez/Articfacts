@@ -84,6 +84,7 @@ async function getTown1(url){
         document.querySelector("#option1").setAttribute("class","destination common");
     }
     document.getElementsByClassName("descripcion").item(0).innerHTML = data.option1.description;
+    document.getElementsByClassName("distance").item(0).innerHTML = data.option1.distance;
     const marker = L.marker([data.option1.lat, data.option1.long], {icon: hielito}).addTo(map);
     marker.bindPopup(data.option1.town);
 
@@ -210,6 +211,12 @@ async function changeLocation(n){
     let newLocation = document.getElementById(`ciudad${n}`).innerHTML;
     currentLocation.innerHTML = "";
     currentLocation.innerHTML = newLocation;
+
+    let url = "http://127.0.0.1:5000/movelocation/" + newLocation + "/" + username.innerHTML ;
+  const response = await fetch(url);
+  if (!response.ok) throw new Error('Invalid server input.');
+    const data = await response.json();
+
 }
 
 var days = 21 ;

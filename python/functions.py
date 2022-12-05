@@ -115,12 +115,25 @@ from geopy import distance
 #TESTING
 tampere = [61.414101,23.604401]
 helsinki = [60.3172,24.963301]
-def calculate_distance(current_location,other_location):
-    distancia = int(distance.distance(current_location,other_location).km)
+
+def calculate_distance(other_location):
+    sql = "select location from scoreboard order by id desc limit 1;"
+    cursor = connection.cursor()
+    cursor.execute(sql)
+    result = cursor.fetchall()
+
+    sql2 = "select latitude_deg, longitude_deg from airports where town ='" + result[0][0] + "' ;"
+    cursor = connection.cursor()
+    cursor.execute(sql2)
+    result2 = cursor.fetchall()
+
+    current_pos = [result2[0][0], result2[0][1]]
+
+    distancia = int(distance.geodesic(current_pos, other_location).km)
     print(distancia)
     return distancia
 
-calculate_distance(tampere,helsinki)
+calculate_distance(tampere)
 
 """if(data.option1.rarity === "rare"){
         document.body.style.backgroundColor = #A6ECA8;
