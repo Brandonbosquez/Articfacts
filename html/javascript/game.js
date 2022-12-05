@@ -17,9 +17,17 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 }).addTo(map);
 
+async function storePlayer(name){
+   let url = "http://127.0.0.1:5000/username/" + name ;
+  const response = await fetch(url);
+  if (!response.ok) throw new Error('Invalid server input.');
+    const data = await response.json();
+    }
+
 const selectedUsername = prompt('Select a Username','Type username');
 const username = document.querySelector('#player');
 username.innerHTML = selectedUsername;
+storePlayer(username.innerHTML);
 
 
 
@@ -52,7 +60,14 @@ async function getTown1(url){
     const data = await response.json();
     console.log(data.option1.town);
     const panel = document.getElementById("option1");
-    panel.addEventListener("click", turn);
+    panel.addEventListener("click", turn1);
+    /*panel.addEventListener("click", ()=>{
+        changeLocation(1);
+        turn();
+    });  */
+    //TEST TEST
+    //currentLocation.innerHTML = document.getElementById('ciudad1').innerText;
+    //currentLocation.innerHTML = document.getElementById('ciudaduno').innerText;
     //panel.querySelector('#ciudaduno').innerHTML = data.option1.town;
     document.getElementsByClassName("town").item(0).innerHTML = data.option1.town ;
     document.getElementById('icon1').setAttribute("src",`img/icons/${data.option1.id}.jpg`);
@@ -73,7 +88,7 @@ async function getTown1(url){
     marker.bindPopup(data.option1.town);
 
     const panel2 = document.getElementById("option2");
-    panel2.addEventListener("click", turn);
+    panel2.addEventListener("click", turn2);
     document.getElementsByClassName("town").item(1).innerHTML = data.option2.town ;
     document.getElementById('icon2').setAttribute("src",`img/icons/${data.option2.id}.jpg`);
     document.getElementsByClassName("artefacto").item(1).innerHTML = data.option2.artifact;
@@ -95,7 +110,7 @@ async function getTown1(url){
 
 
     const panel3 = document.getElementById("option3");
-    panel3.addEventListener("click", turn);
+    panel3.addEventListener("click", turn3);
     document.getElementsByClassName("town").item(2).innerHTML = data.option3.town ;
     document.getElementById('icon3').setAttribute("src",`img/icons/${data.option3.id}.jpg`);
     document.getElementsByClassName("artefacto").item(2).innerHTML = data.option3.artifact;
@@ -116,7 +131,7 @@ async function getTown1(url){
     marker3.bindPopup(data.option3.town);
 
     const panel4 = document.getElementById("option4");
-    panel4.addEventListener("click", turn);
+    panel4.addEventListener("click", turn4);
     //panel.querySelector('#ciudaduno').innerHTML = data.option1.town;
     document.getElementsByClassName("town").item(3).innerHTML = data.option4.town ;
     document.getElementById('icon4').setAttribute("src",`img/icons/${data.option4.id}.jpg`);
@@ -191,9 +206,9 @@ async function getTown4(url){
 let currentLocation =  document.getElementById('location');
 currentLocation.innerHTML = 'Helsinki' ;
 
-async function changeLocation(){
-    let newLocation = this.querySelector('.town').innerHTML;
-    let currentLocation = "";
+async function changeLocation(n){
+    let newLocation = document.getElementById(`ciudad${n}`).innerHTML;
+    currentLocation.innerHTML = "";
     currentLocation.innerHTML = newLocation;
 }
 
@@ -203,16 +218,48 @@ async function dayPass(){
     document.getElementById('days').innerHTML = days;
 }
 async  function turn() {
-   dayPass();
+    //await changeLocation(n);
+    dayPass();
     const url = 'http://127.0.0.1:5000/fouroptions';
     getTown1(url);
     /*L.map('map').setView([65.0121, 25.4651], 10)*/
 }
 
+async  function turn1() {
+    changeLocation(1)
+    dayPass();
+    const url = 'http://127.0.0.1:5000/fouroptions';
+    getTown1(url);
+}
+async  function turn2() {
+    changeLocation(2)
+    dayPass();
+    const url = 'http://127.0.0.1:5000/fouroptions';
+    getTown1(url);
+    /*L.map('map').setView([65.0121, 25.4651], 10)*/
+}
+async  function turn3() {
+    changeLocation(3)
+    dayPass();
+    const url = 'http://127.0.0.1:5000/fouroptions';
+    getTown1(url);
+    /*L.map('map').setView([65.0121, 25.4651], 10)*/
+}
+async  function turn4() {
+    changeLocation(4)
+    dayPass();
+    const url = 'http://127.0.0.1:5000/fouroptions';
+    getTown1(url);
+    /*L.map('map').setView([65.0121, 25.4651], 10)*/
+}
+
+
 //let currentLocation = {"location":"Helsinki","lat":60.1699, "long":24.9384};
 // document.getElementById('location').innerHTML = 'Helsinki';
 
+
 turn();
+
 
 //let selection = getData(url);
 //document.querySelector('#ciudaduno').innerText = selection.;

@@ -3,6 +3,8 @@ import random
 from flask import Flask, request
 import mysql.connector
 from flask_cors import CORS
+import requests
+import json
 from geopy import distance
 
 connection = mysql.connector.connect(
@@ -105,6 +107,13 @@ app = Flask(__name__)
 cors = CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
 
+@app.route('/username/<name>')
+def store_name(name):
+    username = name
+    sql = "INSERT INTO scoreboard (username, pilot) VALUES ('"+ username +"' , 'bran');"
+    cursor = connection.cursor()
+    cursor.execute(sql)
+    return username
 
 @app.route('/fouroptions')
 def four_options():
@@ -149,12 +158,27 @@ def four_options():
     }
     #response['option1']['name']
     return response1
+
+@app.route('/movelocation/<new>')
+def move(new):
+    current_location = new
+
 """
 @app.route('/distance/<current>&&<new>')
 def distance(current, new):
     distance = calculate_distance(current, new)
     return distance"""
 
+#SEGUNDO API INTENTO
+"""
+@app.route('/info')
+def information():
+    #key = cuestion
+    requesto = "https://en.wikipedia.org/w/api.php?action=query&prop=extracts&exlimit=1&titles=pizza&explaintext=1&exsectionformat=plain"
+    response = requests.get(requesto)
+    json_response = response.json()
+    #print(json.dumps(json_response, indent=2))
+    return json_response"""
 
 
 
