@@ -121,7 +121,7 @@ app.config['CORS_HEADERS'] = 'Content-Type'
 
 @app.route('/username/<name>')
 def store_name(name):
-    username = name
+    username = name.json()
     sql = "INSERT INTO scoreboard (username, pilot) VALUES ('"+ username +"' , 'bran');"
     cursor = connection.cursor()
     cursor.execute(sql)
@@ -130,7 +130,12 @@ def store_name(name):
 @app.route('/fouroptions')
 def four_options():
     four_options = random.sample(all_options, 4)
-    distance1 = calculate_distance([four_options[0][2][0],four_options[0][2][1]])
+
+    distance1 = calculate_distance([four_options[0][2][0], four_options[0][2][1]])
+    distance2 = calculate_distance([four_options[1][2][0], four_options[1][2][1]])
+    distance3 = calculate_distance([four_options[2][2][0], four_options[2][2][1]])
+    distance4 = calculate_distance([four_options[3][2][0], four_options[3][2][1]])
+
     response1 = { "option1": {
             "town": four_options[0][0],
             "id": four_options[0][1][0],
@@ -139,7 +144,7 @@ def four_options():
             "description": four_options[0][1][3],
             "lat": four_options[0][2][0],
             "long": four_options[0][2][1],
-            "distance": int(distance1)
+            "distance": distance1
         }
         ,"option2" :  {
             "town" : four_options[1][0],
@@ -148,7 +153,8 @@ def four_options():
             "rarity" : four_options[1][1][2],
             "description" : four_options[1][1][3],
             "lat": four_options[1][2][0],
-            "long": four_options[1][2][1]
+            "long": four_options[1][2][1],
+            "distance": distance2
         },
         "option3": {
             "town": four_options[2][0],
@@ -157,7 +163,8 @@ def four_options():
             "rarity": four_options[2][1][2],
             "description": four_options[2][1][3],
             "lat": four_options[2][2][0],
-            "long": four_options[2][2][1]
+            "long": four_options[2][2][1],
+            "distance": distance3
         },
         "option4": {
             "town": four_options[3][0],
@@ -166,15 +173,16 @@ def four_options():
             "rarity": four_options[3][1][2],
             "description": four_options[3][1][3],
             "lat": four_options[3][2][0],
-            "long": four_options[3][2][1]
+            "long": four_options[3][2][1],
+            "distance": distance4
         }
     }
     #response['option1']['name']
     return response1
 
 @app.route('/movelocation/<new>/<username>')
-def move(new,username):
-    sql = "UPDATE scoreboard SET location ='" + new + "' WHERE username ='" + username + "' ;"
+def move(new, username):
+    sql = "UPDATE scoreboard SET location ='" + new + "' WHERE username ='" + username+ "' ;"
     cursor = connection.cursor()
     cursor.execute(sql)
     return new, print("location changed in database :D")

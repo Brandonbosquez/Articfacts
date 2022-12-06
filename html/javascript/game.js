@@ -22,6 +22,7 @@ async function storePlayer(name){
   const response = await fetch(url);
   if (!response.ok) throw new Error('Invalid server input.');
     const data = await response.json();
+    return console.log("USERNAME STORED IN DATABASE")
     }
 
 const selectedUsername = prompt('Select a Username','Type username');
@@ -60,15 +61,9 @@ async function getTown1(url){
     const data = await response.json();
     console.log(data.option1.town);
     const panel = document.getElementById("option1");
-    panel.addEventListener("click", turn1);
-    /*panel.addEventListener("click", ()=>{
-        changeLocation(1);
-        turn();
-    });  */
-    //TEST TEST
-    //currentLocation.innerHTML = document.getElementById('ciudad1').innerText;
-    //currentLocation.innerHTML = document.getElementById('ciudaduno').innerText;
-    //panel.querySelector('#ciudaduno').innerHTML = data.option1.town;
+    //panel.addEventListener("click", turn1);
+    panel.addEventListener("click", turn);
+
     document.getElementsByClassName("town").item(0).innerHTML = data.option1.town ;
     document.getElementById('icon1').setAttribute("src",`img/icons/${data.option1.id}.jpg`);
     document.getElementsByClassName("artefacto").item(0).innerHTML = data.option1.artifact;
@@ -84,12 +79,13 @@ async function getTown1(url){
         document.querySelector("#option1").setAttribute("class","destination common");
     }
     document.getElementsByClassName("descripcion").item(0).innerHTML = data.option1.description;
-    document.getElementsByClassName("distance").item(0).innerHTML = data.option1.distance;
+    //document.getElementsByClassName("distance").item(0).innerHTML = data.option1.distance;
     const marker = L.marker([data.option1.lat, data.option1.long], {icon: hielito}).addTo(map);
     marker.bindPopup(data.option1.town);
 
     const panel2 = document.getElementById("option2");
-    panel2.addEventListener("click", turn2);
+    //panel2.addEventListener("click", turn2);
+    panel2.addEventListener("click", turn);
     document.getElementsByClassName("town").item(1).innerHTML = data.option2.town ;
     document.getElementById('icon2').setAttribute("src",`img/icons/${data.option2.id}.jpg`);
     document.getElementsByClassName("artefacto").item(1).innerHTML = data.option2.artifact;
@@ -105,13 +101,15 @@ async function getTown1(url){
         document.querySelector("#option2").setAttribute("class","destination common");
     }
     document.getElementsByClassName("descripcion").item(1).innerHTML = data.option2.description;
+    //document.getElementsByClassName("distance").item(1).innerHTML = data.option2.distance;
     let pos2 = {"lat":data.option2.lat, "long":data.option2.long};
     const marker2 = L.marker([data.option2.lat, data.option2.long], {icon: hielito}).addTo(map);
     marker2.bindPopup(data.option2.town);
 
 
     const panel3 = document.getElementById("option3");
-    panel3.addEventListener("click", turn3);
+    //panel3.addEventListener("click", turn3);
+    panel3.addEventListener("click", turn);
     document.getElementsByClassName("town").item(2).innerHTML = data.option3.town ;
     document.getElementById('icon3').setAttribute("src",`img/icons/${data.option3.id}.jpg`);
     document.getElementsByClassName("artefacto").item(2).innerHTML = data.option3.artifact;
@@ -127,12 +125,14 @@ async function getTown1(url){
         document.querySelector("#option3").setAttribute("class","destination common");
     }
     document.getElementsByClassName("descripcion").item(2).innerHTML = data.option3.description;
-     let pos3 = {"lat":data.option3.lat, "long":data.option3.long};
+    //document.getElementsByClassName("distance").item(2).innerHTML = data.option3.distance;
+    let pos3 = {"lat":data.option3.lat, "long":data.option3.long};
     const marker3 = L.marker([data.option3.lat, data.option3.long], {icon: hielito}).addTo(map);
     marker3.bindPopup(data.option3.town);
 
     const panel4 = document.getElementById("option4");
-    panel4.addEventListener("click", turn4);
+    //panel4.addEventListener("click", turn4);
+    panel4.addEventListener("click", turn);
     //panel.querySelector('#ciudaduno').innerHTML = data.option1.town;
     document.getElementsByClassName("town").item(3).innerHTML = data.option4.town ;
     document.getElementById('icon4').setAttribute("src",`img/icons/${data.option4.id}.jpg`);
@@ -149,6 +149,7 @@ async function getTown1(url){
         document.querySelector("#option4").setAttribute("class","destination common");
     }
     document.getElementsByClassName("descripcion").item(3).innerHTML = data.option4.description;
+    //document.getElementsByClassName("distance").item(3).innerHTML = data.option4.distance;
     let pos4 = {"lat":data.option4.lat, "long":data.option4.long};
     const marker4 = L.marker([data.option4.lat, data.option4.long], {icon: hielito}).addTo(map);
     marker4.bindPopup(data.option4.town);
