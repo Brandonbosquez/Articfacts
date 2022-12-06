@@ -119,22 +119,31 @@ app = Flask(__name__)
 cors = CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
 
+
 @app.route('/username/<name>')
 def store_name(name):
-    username = name.json()
-    sql = "INSERT INTO scoreboard (username, pilot) VALUES ('"+ username +"' , 'bran');"
+    username = str(name)
+    sql = "INSERT INTO scoreboard (username, pilot) VALUES ('" + username + "', 'Brann');"
     cursor = connection.cursor()
     cursor.execute(sql)
-    return username
+    return print("Username stored in database")
+
 
 @app.route('/fouroptions')
 def four_options():
     four_options = random.sample(all_options, 4)
 
+    """
     distance1 = calculate_distance([four_options[0][2][0], four_options[0][2][1]])
     distance2 = calculate_distance([four_options[1][2][0], four_options[1][2][1]])
     distance3 = calculate_distance([four_options[2][2][0], four_options[2][2][1]])
     distance4 = calculate_distance([four_options[3][2][0], four_options[3][2][1]])
+    """
+
+    distance1 = 1
+    distance2 = 2
+    distance3 = 3
+    distance4 = 4
 
     response1 = { "option1": {
             "town": four_options[0][0],
@@ -177,15 +186,16 @@ def four_options():
             "distance": distance4
         }
     }
-    #response['option1']['name']
     return response1
 
 @app.route('/movelocation/<new>/<username>')
 def move(new, username):
-    sql = "UPDATE scoreboard SET location ='" + new + "' WHERE username ='" + username+ "' ;"
+    newx = str(new)
+    usernamex = str(username)
+    sql = "UPDATE scoreboard SET location ='" + newx + "' WHERE username ='" + usernamex + "' ;"
     cursor = connection.cursor()
     cursor.execute(sql)
-    return new, print("location changed in database :D")
+    return print("location changed in database :D")
 
 """
 @app.route('/distance/<current>&&<new>')

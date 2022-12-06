@@ -22,7 +22,7 @@ async function storePlayer(name){
   const response = await fetch(url);
   if (!response.ok) throw new Error('Invalid server input.');
     const data = await response.json();
-    return console.log("USERNAME STORED IN DATABASE")
+    return console.log("USERNAME STORED IN DATABASE");
     }
 
 const selectedUsername = prompt('Select a Username','Type username');
@@ -55,11 +55,14 @@ async function fourOptions(){
         return jsonData;
     }
 }
+
 async function getTown1(url){
   const response = await fetch(url);
   if (!response.ok) throw new Error('Invalid server input.');
     const data = await response.json();
     console.log(data.option1.town);
+
+
     const panel = document.getElementById("option1");
     //panel.addEventListener("click", turn1);
     panel.addEventListener("click", turn);
@@ -82,6 +85,7 @@ async function getTown1(url){
     //document.getElementsByClassName("distance").item(0).innerHTML = data.option1.distance;
     const marker = L.marker([data.option1.lat, data.option1.long], {icon: hielito}).addTo(map);
     marker.bindPopup(data.option1.town);
+
 
     const panel2 = document.getElementById("option2");
     //panel2.addEventListener("click", turn2);
@@ -130,10 +134,11 @@ async function getTown1(url){
     const marker3 = L.marker([data.option3.lat, data.option3.long], {icon: hielito}).addTo(map);
     marker3.bindPopup(data.option3.town);
 
+
     const panel4 = document.getElementById("option4");
     //panel4.addEventListener("click", turn4);
     panel4.addEventListener("click", turn);
-    //panel.querySelector('#ciudaduno').innerHTML = data.option1.town;
+
     document.getElementsByClassName("town").item(3).innerHTML = data.option4.town ;
     document.getElementById('icon4').setAttribute("src",`img/icons/${data.option4.id}.jpg`);
     document.getElementsByClassName("artefacto").item(3).innerHTML = data.option4.artifact;
@@ -155,54 +160,7 @@ async function getTown1(url){
     marker4.bindPopup(data.option4.town);
     }
 
-/*FUNCIONES QUE PASARON A MEJOR VIDA: DEP
-async function getTown2(url){
-const response = await fetch(url);
-if (!response.ok) throw new Error('Invalid server input.');
-const data = await response.json();
-console.log(data.option2.town);
-const panel = document.getElementById("option2");
-panel.addEventListener("click", turn);
-document.getElementsByClassName("town").item(1).innerHTML = data.option2.town ;
-document.getElementById('icon1').setAttribute("src","img/icons/204.jpg");
-document.getElementsByClassName("artefacto").item(1).innerHTML = data.option2.artifact;
-document.getElementsByClassName("rareza").item(1).innerHTML = data.option2.rarity;
-document.getElementsByClassName("descripcion").item(1).innerHTML = data.option2.description;
-const marker = L.marker([data.option2.lat, data.option2.long]).addTo(map);
-marker.bindPopup(data.option2.town);
-}
-async function getTown3(url){
-const response = await fetch(url);
-if (!response.ok) throw new Error('Invalid server input.');
-const data = await response.json();
-console.log(data.option2.town);
-const panel = document.getElementById("option3");
-panel.addEventListener("click", turn);
-//panel.querySelector('#ciudaduno').innerHTML = data.option1.town;
-document.getElementsByClassName("town").item(2).innerHTML = data.option3.town ;
-document.getElementById('icon1').setAttribute("src","img/icons/204.jpg");
-document.getElementsByClassName("artefacto").item(2).innerHTML = data.option3.artifact;
-document.getElementsByClassName("rareza").item(2).innerHTML = data.option3.rarity;
-document.getElementsByClassName("descripcion").item(2).innerHTML = data.option3.description;
-const marker = L.marker([data.option3.lat, data.option3.long]).addTo(map);
-marker.bindPopup(data.option3.town);
-}
-async function getTown4(url){
-  const response = await fetch(url);
-  if (!response.ok) throw new Error('Invalid server input.');
-    const data = await response.json();
-    console.log(data.option2.town);
-    const panel = document.getElementById("option4");
-    panel.addEventListener("click", turn);
-    //panel.querySelector('#ciudaduno').innerHTML = data.option1.town;
-    document.getElementsByClassName("town").item(3).innerHTML = data.option4.town ;
-    document.getElementById('icon1').setAttribute("src","img/icons/204.jpg");
-    document.getElementsByClassName("artefacto").item(3).innerHTML = data.option4.artifact;
-    document.getElementsByClassName("rareza").item(3).innerHTML = data.option4.rarity;
-    document.getElementsByClassName("descripcion").item(3).innerHTML = data.option4.description;
-    const marker = L.marker([data.option4.lat, data.option4.long]).addTo(map);
-    marker.bindPopup(data.option4.town);
-    }*/
+/*FUNCIONES QUE PASARON A MEJOR VIDA: DEP */
 
 
 let currentLocation =  document.getElementById('location');
@@ -220,13 +178,14 @@ async function changeLocation(n){
 
 }
 
-var days = 21 ;
+let days = 21 ;
 async function dayPass(){
     days -= 1;
     document.getElementById('days').innerHTML = days;
 }
+
 async  function turn() {
-    //await changeLocation(n);
+    //changeLocation(1);
     dayPass();
     const url = 'http://127.0.0.1:5000/fouroptions';
     getTown1(url);
