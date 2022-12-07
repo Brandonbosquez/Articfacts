@@ -114,12 +114,13 @@ pruebitas = random.sample(all_options,4)
 #print(pruebitas)
 
 
-
+# APPLIKATION INITIERAD
 app = Flask(__name__)
 cors = CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
 
 
+#Dela koden på lite bitar y usar en aquellas partes
 @app.route('/username/<name>')
 def store_name(name):
     username = str(name)
@@ -196,6 +197,15 @@ def move(new, username):
     cursor = connection.cursor()
     cursor.execute(sql)
     return print("location changed in database :D")
+
+@app.route('/wiki/<search>')
+def wiki(search):
+    town = search
+    request = "https://en.wikipedia.org/api/rest_v1/page/summary/" + town
+    response = requests.get(request).json()
+    print(json.dumps(response["extract"], indent=2))
+    extract = [response["extract"]]
+    return extract
 
 """
 @app.route('/distance/<current>&&<new>')
