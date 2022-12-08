@@ -207,6 +207,24 @@ def wiki(search):
     extract = [response["extract"]]
     return extract
 
+@app.route('/remove/<town>')
+def remover(town):
+    lugar = town
+    for i in all_options:
+        if i[0] == lugar:
+            print(i)
+            i[1][0] = 0
+            i[1][1] = "None"
+            i[1][2] = "---"
+            i[1][3] = "No artifact here!"
+
+            print(i[1][1])
+            print(i)
+            return i
+
+
+
+
 """
 @app.route('/distance/<current>&&<new>')
 def distance(current, new):

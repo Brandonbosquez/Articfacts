@@ -176,7 +176,8 @@ async function getTown1(url){
 let currentLocation =  document.getElementById('location');
 currentLocation.innerHTML = 'Helsinki' ;
 
-async function changeLocation(n){
+async function changeLocation(num){
+    let n = num + 1 ;
     let newLocation = document.getElementById(`ciudad${n}`).innerHTML;
     currentLocation.innerHTML = "";
     currentLocation.innerHTML = newLocation;
@@ -203,11 +204,84 @@ async function bienvenida(){
     console.log(data)
     document.getElementById("info").innerHTML = data
 }
+// PUNTAJE
+let score = document.getElementById("score");
+let puntaje = 0;
+score.innerHTML = puntaje;
+
+// CAMBIANDO EL PUNTAJE DEL JUGADOR -- ACTUALIZAR LAS METAS
+let targetgoal1 = 3
+let targetgoal2 = 2
+let targetgoal3 = 1
+let goal1 = document.getElementById("goal1");
+let goal2 = document.getElementById("goal2");
+let goal3 = document.getElementById("goal3");
+let meta1 = 0
+let meta2 = 0
+let meta3 = 0
+
+
+document.getElementById("targetgoal1").innerHTML = targetgoal1;
+document.getElementById("targetgoal2").innerHTML = targetgoal2;
+document.getElementById("targetgoal3").innerHTML = targetgoal3;
+
+goal1.innerHTML = meta1;
+goal2.innerHTML = meta2;
+goal3.innerHTML = meta3;
+
+async function checkmetas(num){
+    let n = num
+   let rareza = document.getElementsByClassName("rareza").item(n).innerHTML;
+    if(rareza === "Common"){
+        puntaje = puntaje + 100;
+        score.innerHTML = puntaje;
+        if(meta1<targetgoal1) {
+            meta1++
+            document.getElementsByClassName("meta").item(0).innerHTML = meta1;
+
+        }
+    }
+    else if(rareza === "Rare"){
+        puntaje = puntaje + 200;
+        score.innerHTML = puntaje;
+        if(meta2<targetgoal2) {
+            meta2++
+            document.getElementsByClassName("meta").item(1).innerHTML = meta2;
+
+        }
+
+    }
+    else{
+        puntaje = puntaje + 300;
+        score.innerHTML = puntaje;
+        if(meta3<targetgoal3) {
+            meta3++
+            document.getElementsByClassName("meta").item(2).innerHTML = meta3;
+
+        }
+    }
+}
+
 // SETEANDO EL NUMERO DE CASILLERO DISPONIBLE
 let slot = 0;
 async function collect(slotnum, src){
     let slot = document.getElementsByClassName("artifact").item(slotnum);
     slot.setAttribute("src",src);
+}
+
+async function remove(town){
+
+}
+
+async function coleccionar(num){
+    let n = num
+   let artifact = document.getElementsByClassName("artefacto").item(n).innerHTML;
+    if (artifact !== "None"){
+        let source = document.getElementsByClassName("responsive-img").item(n).src;
+        collect(slot, source);
+        slot++;
+        document.getElementsByClassName("responsive-img").item(n).setAttribute("src", "img/otros/vacio.png")
+    }
 }
 
 async  function turn(n) {
@@ -221,20 +295,20 @@ async  function turn(n) {
 
 async  function turn1() {
     let n = 0 ;
-    let artifact = document.getElementsByClassName("artefacto").item(n).innerHTML;
-    if (artifact !== "None"){
-        let source = document.getElementsByClassName("responsive-img").item(n).src;
-        collect(slot, source);
-        slot++;
-    }
-    changeLocation(1)
-    bienvenida()
+    checkmetas(n);
+    coleccionar(n);
+
+    changeLocation(n);
+    bienvenida();
     dayPass();
     const url = 'http://127.0.0.1:5000/fouroptions';
     getTown1(url);
 }
 async  function turn2() {
-    changeLocation(2)
+    let n = 1 ;
+    checkmetas(n);
+    coleccionar(n);
+    changeLocation(n);
     bienvenida()
     dayPass();
     const url = 'http://127.0.0.1:5000/fouroptions';
@@ -242,7 +316,10 @@ async  function turn2() {
     /*L.map('map').setView([65.0121, 25.4651], 10)*/
 }
 async  function turn3() {
-    changeLocation(3)
+    let n = 2 ;
+    checkmetas(n);
+    coleccionar(n);
+    changeLocation(n);
     bienvenida()
     dayPass();
     const url = 'http://127.0.0.1:5000/fouroptions';
@@ -250,7 +327,10 @@ async  function turn3() {
     /*L.map('map').setView([65.0121, 25.4651], 10)*/
 }
 async  function turn4() {
-    changeLocation(4)
+    let n = 3 ;
+    checkmetas(n);
+    coleccionar(n);
+    changeLocation(n);
     bienvenida()
     dayPass();
     const url = 'http://127.0.0.1:5000/fouroptions';
