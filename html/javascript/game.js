@@ -1,7 +1,5 @@
 'use strict';
 
-/* MAP FROM LEAFLET QUICK GUIDE :) */
-//var map = L.map('map').setView([60.1699,24.9384], 6);
 var map = L.map('map').setView([65.0511, 27.0576], 5);
 
 var hielito = L.icon({
@@ -17,19 +15,36 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 }).addTo(map);
 
-async function storePlayer(name){
-   let url = "http://127.0.0.1:5000/username/" + name ;
-  const response = await fetch(url);
-  if (!response.ok) throw new Error('Invalid server input.');
-    const data = await response.json();
-    return console.log("USERNAME STORED IN DATABASE");
-    }
+// FUNCION PARA EL MODAL :D
+async function closeModal(){
+    modal2.setAttribute("class", "modal");
+    overlay.setAttribute("class", "");
+
+}
+
+let modalloose = document.getElementById("modal-loose");
+let modalwin = document.getElementById("modal-win");
+let modal2 = document.getElementById("modal2");
+let overlay = document.getElementById("overlay");
+let exit = document.getElementsByClassName("close-button").item(0);
+exit.addEventListener("click", closeModal);
+
+
+
+
+
+let id = 0
+async function storePlayer(name) {
+    let url = "http://127.0.0.1:5000/username/" + name;
+    const response = await fetch(url);
+    if (!response.ok) throw new Error('Invalid server input.');
+}
+
 
 const selectedUsername = prompt('Select a Username','Type username');
 const username = document.querySelector('#player');
 username.innerHTML = selectedUsername;
 storePlayer(username.innerHTML);
-
 
 
 //FUNCIÓN PARA HACER EL FETCH DEL SERVIDOR
@@ -65,52 +80,63 @@ async function getTown1(url){
 
     const panel = document.getElementById("option1");
     panel.addEventListener("click", turn1);
-    //panel.addEventListener("click", turn);
-    /*panel.addEventListener("click", () => {
-        turn(0)
-    });*/
 
     document.getElementsByClassName("town").item(0).innerHTML = data.option1.town ;
     document.getElementById('icon1').setAttribute("src",`img/icons/${data.option1.id}.jpg`);
     document.getElementsByClassName("artefacto").item(0).innerHTML = data.option1.artifact;
     document.getElementsByClassName("rareza").item(0).innerHTML = data.option1.rarity;
     console.log(data.option1.rarity);
-    if(data.option1.rarity === "Rare"){
-        document.querySelector("#option1").setAttribute("class","destination rare");
+
+    if(data.option1.rarity !== "---") {
+        if (data.option1.rarity === "Rare") {
+            document.querySelector("#option1").setAttribute("class", "destination rare");
+        } else if (data.option1.rarity === "Special") {
+            document.querySelector("#option1").setAttribute("class", "destination special");
+        } else {
+            document.querySelector("#option1").setAttribute("class", "destination common");
+        }
     }
-    else if(data.option1.rarity  === "Special"){
-        document.querySelector("#option1").setAttribute("class","destination special");
+    else {
+       document.querySelector("#option1").setAttribute("class", "destination none");
     }
-    else{
-        document.querySelector("#option1").setAttribute("class","destination common");
-    }
+
+
+
     document.getElementsByClassName("descripcion").item(0).innerHTML = data.option1.description;
-    //document.getElementsByClassName("distance").item(0).innerHTML = data.option1.distance;
+    document.getElementsByClassName("distance").item(0).innerHTML = data.option1.distance;
+    document.getElementsByClassName("fuel").item(0).innerHTML = data.option1.fuel;
     const marker = L.marker([data.option1.lat, data.option1.long], {icon: hielito}).addTo(map);
     marker.bindPopup(data.option1.town);
 
 
     const panel2 = document.getElementById("option2");
     panel2.addEventListener("click", turn2);
-    /*panel2.addEventListener("click", () => {
-        turn(1)
-    }); */
+
     document.getElementsByClassName("town").item(1).innerHTML = data.option2.town ;
     document.getElementById('icon2').setAttribute("src",`img/icons/${data.option2.id}.jpg`);
     document.getElementsByClassName("artefacto").item(1).innerHTML = data.option2.artifact;
     document.getElementsByClassName("rareza").item(1).innerHTML = data.option2.rarity;
     console.log(data.option2.rarity);
-    if(data.option2.rarity === "Rare"){
-        document.querySelector("#option2").setAttribute("class","destination rare");
+
+    if(data.option2.rarity !== "---") {
+        if(data.option2.rarity === "Rare"){
+            document.querySelector("#option2").setAttribute("class","destination rare");
+        }
+        else if(data.option2.rarity  === "Special"){
+            document.querySelector("#option2").setAttribute("class","destination special");
+        }
+        else{
+            document.querySelector("#option2").setAttribute("class","destination common");
+        }
     }
-    else if(data.option2.rarity  === "Special"){
-        document.querySelector("#option2").setAttribute("class","destination special");
+    else {
+       document.querySelector("#option2").setAttribute("class", "destination none");
     }
-    else{
-        document.querySelector("#option2").setAttribute("class","destination common");
-    }
+
     document.getElementsByClassName("descripcion").item(1).innerHTML = data.option2.description;
-    //document.getElementsByClassName("distance").item(1).innerHTML = data.option2.distance;
+    document.getElementsByClassName("distance").item(1).innerHTML = data.option2.distance;
+    document.getElementsByClassName("fuel").item(1).innerHTML = data.option2.fuel;
+
     let pos2 = {"lat":data.option2.lat, "long":data.option2.long};
     const marker2 = L.marker([data.option2.lat, data.option2.long], {icon: hielito}).addTo(map);
     marker2.bindPopup(data.option2.town);
@@ -118,27 +144,33 @@ async function getTown1(url){
 
     const panel3 = document.getElementById("option3");
     panel3.addEventListener("click", turn3);
-    //panel3.addEventListener("click", turn);
-    /*panel3.addEventListener("click", () => {
-        turn(2)
-    });*/
 
     document.getElementsByClassName("town").item(2).innerHTML = data.option3.town ;
     document.getElementById('icon3').setAttribute("src",`img/icons/${data.option3.id}.jpg`);
     document.getElementsByClassName("artefacto").item(2).innerHTML = data.option3.artifact;
     document.getElementsByClassName("rareza").item(2).innerHTML = data.option3.rarity;
     console.log(data.option3.rarity);
-    if(data.option3.rarity === "Rare"){
-        document.querySelector("#option3").setAttribute("class","destination rare");
+
+    if(data.option3.rarity !== "---") {
+        if(data.option3.rarity === "Rare"){
+            document.querySelector("#option3").setAttribute("class","destination rare");
+        }
+        else if(data.option3.rarity  === "Special"){
+            document.querySelector("#option3").setAttribute("class","destination special");
+        }
+        else{
+            document.querySelector("#option3").setAttribute("class","destination common");
+        }
     }
-    else if(data.option3.rarity  === "Special"){
-        document.querySelector("#option3").setAttribute("class","destination special");
+    else {
+       document.querySelector("#option3").setAttribute("class", "destination none");
     }
-    else{
-        document.querySelector("#option3").setAttribute("class","destination common");
-    }
+
+
     document.getElementsByClassName("descripcion").item(2).innerHTML = data.option3.description;
-    //document.getElementsByClassName("distance").item(2).innerHTML = data.option3.distance;
+    document.getElementsByClassName("distance").item(2).innerHTML = data.option3.distance;
+    document.getElementsByClassName("fuel").item(2).innerHTML = data.option3.fuel;
+
     let pos3 = {"lat":data.option3.lat, "long":data.option3.long};
     const marker3 = L.marker([data.option3.lat, data.option3.long], {icon: hielito}).addTo(map);
     marker3.bindPopup(data.option3.town);
@@ -146,7 +178,6 @@ async function getTown1(url){
 
     const panel4 = document.getElementById("option4");
     panel4.addEventListener("click", turn4);
-    //panel4.addEventListener("click", turn);
 
 
     document.getElementsByClassName("town").item(3).innerHTML = data.option4.town ;
@@ -154,17 +185,27 @@ async function getTown1(url){
     document.getElementsByClassName("artefacto").item(3).innerHTML = data.option4.artifact;
     document.getElementsByClassName("rareza").item(3).innerHTML = data.option4.rarity;
     console.log(data.option4.rarity);
-    if(data.option4.rarity === "Rare"){
-        document.querySelector("#option4").setAttribute("class","destination rare");
+
+    if(data.option4.rarity !== "---") {
+        if(data.option4.rarity === "Rare"){
+            document.querySelector("#option4").setAttribute("class","destination rare");
+        }
+        else if(data.option4.rarity  === "Special"){
+            document.querySelector("#option4").setAttribute("class","destination special");
+        }
+        else{
+            document.querySelector("#option4").setAttribute("class","destination common");
+        }
     }
-    else if(data.option4.rarity  === "Special"){
-        document.querySelector("#option4").setAttribute("class","destination special");
+    else {
+       document.querySelector("#option4").setAttribute("class", "destination none");
     }
-    else{
-        document.querySelector("#option4").setAttribute("class","destination common");
-    }
+
+
     document.getElementsByClassName("descripcion").item(3).innerHTML = data.option4.description;
-    //document.getElementsByClassName("distance").item(3).innerHTML = data.option4.distance;
+    document.getElementsByClassName("distance").item(3).innerHTML = data.option4.distance;
+    document.getElementsByClassName("fuel").item(3).innerHTML = data.option4.fuel;
+
     let pos4 = {"lat":data.option4.lat, "long":data.option4.long};
     const marker4 = L.marker([data.option4.lat, data.option4.long], {icon: hielito}).addTo(map);
     marker4.bindPopup(data.option4.town);
@@ -182,7 +223,9 @@ async function changeLocation(num){
     currentLocation.innerHTML = "";
     currentLocation.innerHTML = newLocation;
 
-    document.getElementById("bienv").innerHTML = newLocation
+    document.getElementById("bienv").innerHTML = newLocation;
+
+    consumption(num);
 
     /*let url = "http://127.0.0.1:5000/movelocation/" + newLocation + "/" + username.innerHTML ;
   const response = await fetch(url);
@@ -190,10 +233,28 @@ async function changeLocation(num){
     const data = await response.json();*/
 }
 
-let days = 16 ;
+//CHECKEAR LAS GOALS
+async function ganador(){
+    if (metasAlcanzadas === 3){
+        modalwin.setAttribute("class","modal active");
+        overlay.setAttribute("class","active");
+    }
+    else {
+        modalloose.setAttribute("class","modal active");
+        overlay.setAttribute("class","active");
+
+    }
+}
+
+
+let days = 11 ;
 async function dayPass(){
     days -= 1;
     document.getElementById('days').innerHTML = days;
+    if(days === 0){
+        console.log("TIME IS UP 0 DAYS LEFT")
+        ganador()
+    }
 }
 
 async function bienvenida(){
@@ -204,21 +265,36 @@ async function bienvenida(){
     console.log(data)
     document.getElementById("info").innerHTML = data
 }
-// PUNTAJE
+// PUNTAJE OCH BRÄNSLE
 let score = document.getElementById("score");
 let puntaje = 0;
 score.innerHTML = puntaje;
 
+let fuel = document.getElementById("fuel");
+let initialfuel = 30000;
+fuel.innerHTML = initialfuel;
+let fuelleft = initialfuel;
+
+// meter en changelocation functtt
+async function consumption(num){
+    let n = num;
+    let gasto = document.getElementsByClassName("fuel").item(n).innerHTML;
+    fuelleft = fuelleft - parseInt(gasto);
+    fuel.innerHTML = fuelleft;
+}
+
 // CAMBIANDO EL PUNTAJE DEL JUGADOR -- ACTUALIZAR LAS METAS
-let targetgoal1 = 3
-let targetgoal2 = 2
-let targetgoal3 = 1
+let metasAlcanzadas = 0;
+
+let targetgoal1 = 3;
+let targetgoal2 = 2;
+let targetgoal3 = 1;
 let goal1 = document.getElementById("goal1");
 let goal2 = document.getElementById("goal2");
 let goal3 = document.getElementById("goal3");
-let meta1 = 0
-let meta2 = 0
-let meta3 = 0
+let meta1 = 0;
+let meta2 = 0;
+let meta3 = 0;
 
 
 document.getElementById("targetgoal1").innerHTML = targetgoal1;
@@ -230,7 +306,7 @@ goal2.innerHTML = meta2;
 goal3.innerHTML = meta3;
 
 async function checkmetas(num){
-    let n = num
+    let n = num;
    let rareza = document.getElementsByClassName("rareza").item(n).innerHTML;
     if(rareza === "Common"){
         puntaje = puntaje + 100;
@@ -238,7 +314,15 @@ async function checkmetas(num){
         if(meta1<targetgoal1) {
             meta1++
             document.getElementsByClassName("meta").item(0).innerHTML = meta1;
+            if (meta1 === targetgoal1){
+                document.getElementsByClassName("goal").item(0).setAttribute("class","goal completed");
+                metasAlcanzadas ++
+                console.log(`Metas alcanzadas: ${metasAlcanzadas}`);
+            }
 
+        }
+        else{
+            document.getElementsByClassName("goal").item(0).setAttribute("class","goal completed");
         }
     }
     else if(rareza === "Rare"){
@@ -247,26 +331,50 @@ async function checkmetas(num){
         if(meta2<targetgoal2) {
             meta2++
             document.getElementsByClassName("meta").item(1).innerHTML = meta2;
+            if (meta2 === targetgoal2){
+                document.getElementsByClassName("goal").item(1).setAttribute("class","goal completed");
+                metasAlcanzadas ++
+                console.log(`Metas alcanzadas: ${metasAlcanzadas}`);
+            }
 
+        }
+        else{
+            document.getElementsByClassName("goal").item(1).setAttribute("class","goal completed");
         }
 
     }
-    else{
+    else if (rareza === "Special"){
         puntaje = puntaje + 300;
         score.innerHTML = puntaje;
         if(meta3<targetgoal3) {
             meta3++
             document.getElementsByClassName("meta").item(2).innerHTML = meta3;
+            if (meta3=== targetgoal3){
+                document.getElementsByClassName("goal").item(2).setAttribute("class","goal completed");
+                metasAlcanzadas ++
+                console.log(`Metas alcanzadas: ${metasAlcanzadas}`);
+            }
 
         }
+        else{
+            document.getElementsByClassName("goal").item(2).setAttribute("class","goal completed");
+        }
     }
+    else{
+        console.log("No artifact here. Score stays the same")
+        }
 }
 
 // SETEANDO EL NUMERO DE CASILLERO DISPONIBLE
 let slot = 0;
-async function collect(slotnum, src){
+async function collect(slotnum, src,num){
     let slot = document.getElementsByClassName("artifact").item(slotnum);
     slot.setAttribute("src",src);
+    let townname = document.getElementsByClassName("town").item(num);
+    let url = "http://127.0.0.1:5000/remove/"+ townname.innerHTML ;
+    const response = await fetch(url);
+    if (!response.ok) throw new Error('Invalid server input WIKI.');
+
 }
 
 async function remove(town){
@@ -278,11 +386,23 @@ async function coleccionar(num){
    let artifact = document.getElementsByClassName("artefacto").item(n).innerHTML;
     if (artifact !== "None"){
         let source = document.getElementsByClassName("responsive-img").item(n).src;
-        collect(slot, source);
+        collect(slot, source,n);
         slot++;
-        document.getElementsByClassName("responsive-img").item(n).setAttribute("src", "img/otros/vacio.png")
     }
 }
+
+// FUNCIONES PARA REVISAR QUE LOS PARAMETROS NO SEAN NEGATIVOS:::
+
+/*
+async function checkdays(){
+    let daysleft = document.getElementById(days);
+    if (daysleft.innerHTML === "0"){
+        console.log("THE EXHIBITION IS TODAY, TIME'S UP")
+    }
+}
+*/
+
+
 
 async  function turn(n) {
     changeLocation(n);
@@ -290,7 +410,7 @@ async  function turn(n) {
     dayPass();
     const url = 'http://127.0.0.1:5000/fouroptions';
     getTown1(url);
-    /*L.map('map').setView([65.0121, 25.4651], 10)*/
+
 }
 
 async  function turn1() {
@@ -301,6 +421,7 @@ async  function turn1() {
     changeLocation(n);
     bienvenida();
     dayPass();
+    //checkdays();
     const url = 'http://127.0.0.1:5000/fouroptions';
     getTown1(url);
 }
@@ -313,7 +434,7 @@ async  function turn2() {
     dayPass();
     const url = 'http://127.0.0.1:5000/fouroptions';
     getTown1(url);
-    /*L.map('map').setView([65.0121, 25.4651], 10)*/
+
 }
 async  function turn3() {
     let n = 2 ;
@@ -324,7 +445,7 @@ async  function turn3() {
     dayPass();
     const url = 'http://127.0.0.1:5000/fouroptions';
     getTown1(url);
-    /*L.map('map').setView([65.0121, 25.4651], 10)*/
+
 }
 async  function turn4() {
     let n = 3 ;
@@ -335,26 +456,10 @@ async  function turn4() {
     dayPass();
     const url = 'http://127.0.0.1:5000/fouroptions';
     getTown1(url);
-    /*L.map('map').setView([65.0121, 25.4651], 10)*/
 }
-
-
-//let currentLocation = {"location":"Helsinki","lat":60.1699, "long":24.9384};
-// document.getElementById('location').innerHTML = 'Helsinki';
 
 
 turn();
 
 
-//let selection = getData(url);
-//document.querySelector('#ciudaduno').innerText = selection.;
-//let selection = fourOptions();
-//document.querySelector('#ciudaduno').innerText = selection;
-
-/*const opciones = fourOptions();
-console.log('opciones logueada');
-console.log(opciones);
-const ciudaduno = document.querySelector('#ciudaduno').innerText;
-console.log(ciudaduno);*/
-//ciudaduno = opciones.option1.town ;
 
