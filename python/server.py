@@ -7,6 +7,7 @@ import requests
 import json
 from geopy import distance
 
+
 connection = mysql.connector.connect(
     host='127.0.0.1',
     port=3306,
@@ -16,6 +17,35 @@ connection = mysql.connector.connect(
     autocommit=True
 )
 options = 31
+
+class Player():
+    def __init__(self, username="None", location="Helsinki", score=0, status="LOOSER"):
+        self.username = username
+        self.location = location
+        self.score = score
+        self.status = status
+        self.pos = [60.3172,24.963301]
+
+    def ownpos(self):
+        sql = "SELECT latitude_deg, longitude_deg FROM airports WHERE town ='" + self.location + "' ;"
+        cursor = connection.cursor()
+        cursor.execute(sql)
+        result = cursor.fetchall()
+        print(result)
+
+        pos = [result[0][0], result[0][1]]
+
+        self.pos = pos
+
+
+    def distance(self,newpos):
+        self.ownpos()
+        distancia = calculate_distance(self.pos, newpos)
+        return distancia
+
+
+
+
 def locations_list_function():
     sql = "SELECT town FROM airports"
     cursor = connection.cursor()
@@ -90,7 +120,7 @@ start_location = ['Helsinki',[60.1699,24.9384]]
 current_location = start_location[1]
 
 
-def calculate_distance(other_location):
+def calculate_distance(other):
     sql = "select location from scoreboard order by id desc limit 1;"
     cursor = connection.cursor()
     cursor.execute(sql)
@@ -103,7 +133,7 @@ def calculate_distance(other_location):
 
     current_pos = [result2[0][0], result2[0][1]]
 
-    distancia = int(distance.geodesic(current_pos, other_location).km)
+    distancia = int(distance.geodesic(current_pos, other).km)
     print(distancia)
     return distancia
 
@@ -119,27 +149,30 @@ app = Flask(__name__)
 cors = CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
 
-
+player = Player()
 #Dela koden på lite bitar y usar en aquellas partes
 @app.route('/username/<name>')
 def store_name(name):
     username = str(name)
+
+
     sql = "INSERT INTO scoreboard (username, pilot) VALUES ('" + username + "', 'Brann');"
     cursor = connection.cursor()
     cursor.execute(sql)
-    return print("Username stored in database")
+    print(f"Username {name} stored in database")
+
+    return username
 
 
 @app.route('/fouroptions')
 def four_options():
     four_options = random.sample(all_options, 4)
 
-    """
-    distance1 = calculate_distance([four_options[0][2][0], four_options[0][2][1]])
-    distance2 = calculate_distance([four_options[1][2][0], four_options[1][2][1]])
-    distance3 = calculate_distance([four_options[2][2][0], four_options[2][2][1]])
-    distance4 = calculate_distance([four_options[3][2][0], four_options[3][2][1]])
-    """
+
+    #distance1 = calculate_distance([four_options[0][2][0], four_options[0][2][1]])
+    #distance2 = calculate_distance([four_options[1][2][0], four_options[1][2][1]])
+    #distance3 = calculate_distance([four_options[2][2][0], four_options[2][2][1]])
+    #distance4 = calculate_distance([four_options[3][2][0], four_options[3][2][1]])
 
     distance1 = 1
     distance2 = 2
@@ -154,7 +187,8 @@ def four_options():
             "description": four_options[0][1][3],
             "lat": four_options[0][2][0],
             "long": four_options[0][2][1],
-            "distance": distance1
+            "distance": distance1,
+            "fuel": distance1 * 3
         }
         ,"option2" :  {
             "town" : four_options[1][0],
@@ -164,7 +198,8 @@ def four_options():
             "description" : four_options[1][1][3],
             "lat": four_options[1][2][0],
             "long": four_options[1][2][1],
-            "distance": distance2
+            "distance": distance2,
+            "fuel": distance2 * 3
         },
         "option3": {
             "town": four_options[2][0],
@@ -174,7 +209,8 @@ def four_options():
             "description": four_options[2][1][3],
             "lat": four_options[2][2][0],
             "long": four_options[2][2][1],
-            "distance": distance3
+            "distance": distance3,
+            "fuel": distance3 * 3
         },
         "option4": {
             "town": four_options[3][0],
@@ -184,19 +220,22 @@ def four_options():
             "description": four_options[3][1][3],
             "lat": four_options[3][2][0],
             "long": four_options[3][2][1],
-            "distance": distance4
+            "distance": distance4,
+            "fuel": distance4 * 3
         }
     }
     return response1
 
-@app.route('/movelocation/<new>/<username>')
+@app.route('/location/<new>/<username>')
 def move(new, username):
     newx = str(new)
+    player.location = newx
     usernamex = str(username)
     sql = "UPDATE scoreboard SET location ='" + newx + "' WHERE username ='" + usernamex + "' ;"
     cursor = connection.cursor()
     cursor.execute(sql)
-    return print("location changed in database :D")
+    print("location changed in database :D")
+    return player.location
 
 @app.route('/wiki/<search>')
 def wiki(search):
@@ -222,29 +261,7 @@ def remover(town):
             print(i)
             return i
 
-
-
-
-"""
-@app.route('/distance/<current>&&<new>')
-def distance(current, new):
-    distance = calculate_distance(current, new)
-    return distance"""
-
-#SEGUNDO API INTENTO
-"""
-@app.route('/info')
-def information():
-    #key = cuestion
-    requesto = "https://en.wikipedia.org/w/api.php?action=query&prop=extracts&exlimit=1&titles=pizza&explaintext=1&exsectionformat=plain"
-    response = requests.get(requesto)
-    json_response = response.json()
-    #print(json.dumps(json_response, indent=2))
-    return json_response"""
-
-
-
-
+#FINAL DEL CODIGO
 if __name__ == '__main__':
     app.run(use_reloader=True, host='127.0.0.1', port=5000)
     app.debug = True

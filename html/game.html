@@ -82,11 +82,11 @@
                 <table>
                     <tr>
                         <td>DISTANCE: </td>
-                        <td class="distance"><span id="distance1">500 KM</span> </td>
+                        <td><span class="distance">500 </span> KM</td>
                     </tr>
                     <tr>
                         <td>FUEL REQUIRED: </td>
-                        <td class="fuel-required"><span>100 L</span></td>
+                        <td><span class="fuel">100</span> L</td>
                     </tr>
                 </table>
                     </span>
@@ -102,11 +102,11 @@
                 <table>
                     <tr>
                         <td>DISTANCE: </td>
-                        <td class="distance"><span>500 KM</span> </td>
+                        <td><span class="distance">500 </span> KM</td>
                     </tr>
                     <tr>
                         <td>FUEL REQUIRED: </td>
-                        <td class="fuel-required"><span>100 L</span></td>
+                        <td><span class="fuel">100</span> L</td>
                     </tr>
                 </table>
             </div>
@@ -121,15 +121,15 @@
                 <table>
                     <tr>
                         <td>DISTANCE: </td>
-                        <td class="distance"><span>300 KM</span> </td>
+                        <td><span class="distance">500 </span> KM</td>
                     </tr>
                     <tr>
                         <td>FUEL REQUIRED: </td>
-                        <td class="fuel-required"><span>100 L</span></td>
+                        <td><span class="fuel">100</span> L</td>
                     </tr>
                 </table>
             </div>
-            <div class="destination" id="option4">
+            <div class="destination none" id="option4">
                 <h3 class="town-name"><span id="ciudad4" class="town">OULU</span></h3>
                 <figure>
                     <h4><spa class="artefacto" >Fish Bones</spa></h4>
@@ -140,11 +140,11 @@
                 <table>
                     <tr>
                         <td>DISTANCE: </td>
-                        <td class="distance"><span>500 KM</span> </td>
+                        <td><span class="distance">500 </span> KM</td>
                     </tr>
                     <tr>
                         <td>FUEL REQUIRED: </td>
-                        <td class="fuel-required"><span>100 L</span></td>
+                        <td><span class="fuel">100</span> L</td>
                     </tr>
                 </table>
             </div>
@@ -201,6 +201,53 @@
         </div>
 
     </footer>
+
+
+<div class="modal active" id="modal2">
+    <div class="modal-header">
+        <div class="title">YOU HAVE BEEN SELECTED!</div>
+        <button class="close-button">&times;</button>
+    </div>
+    <div class="modal-body">
+         <img id="modal-img" src="img/otros/wintero.jpg" alt="winter pic">
+        <p class="modal-text">Dear Sir or Madam <br><br>We are writing to you from the National Museum of Finland.  We have been preparing our biggest event: the annual exhibition, this year's topic is "Finnish Cultural Artifacts". The artifacts are scattered all throughout Finland, and they were supposed to be sent on trucks to Helsinki, however, this year Finland has been struct by a particularly harsh winter. All the roads are covered in meters of snow. Our trucks will not make it on time! That's why we are contacting you, we heard you are the best pilot. <b>We only have 10 days left!</b><br></p>
+
+    <ul class="modal-text" id="modal-list">Here is a list of what we need:
+        <li>
+            <a>3 Common artifacts<br></a>
+            <a>2 Rare artifacts<br></a>
+            <a>1 Special artifact<br></a>
+        </li>
+    </ul>
+        <p class="modal-text">Hope to hear from you as soon as possible<br>Best Regards,<br><br>Department of Culture<br>National Museum of Finland</p>
+        </div>
+</div>
+
+    <div class="modal" id="modal-loose">
+    <div class="modal-header">
+        <div class="title"><h2 id="disaster">DISASTER!</h2></div>
+
+    </div>
+        <div class="modal-body">
+            <h3>THE EXHIBITION IS TODAY!</h3>
+            <p>The artifacts are not here :( <br>Hopefully next year's exhibition will be better</p>
+        </div>
+</div>
+    <div class="active" id="overlay"></div>
+
+<div class="modal" id="modal-win">
+    <div class="modal-header">
+        <div class="title"><h2 id="success">SUCCESS!</h2></div>
+
+    </div>
+        <div class="modal-body">
+            <h3>THE EXHIBITION IS TODAY!</h3>
+            <p>All the artifacts are here :D <br>You did a great job! Thank you so much!</p>
+        </div>
+</div>
+
+
+
 </div>
 </body>
 </html>
