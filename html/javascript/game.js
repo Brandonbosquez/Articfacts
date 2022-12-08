@@ -203,6 +203,12 @@ async function bienvenida(){
     console.log(data)
     document.getElementById("info").innerHTML = data
 }
+// SETEANDO EL NUMERO DE CASILLERO DISPONIBLE
+let slot = 0;
+async function collect(slotnum, src){
+    let slot = document.getElementsByClassName("artifact").item(slotnum);
+    slot.setAttribute("src",src);
+}
 
 async  function turn(n) {
     changeLocation(n);
@@ -214,6 +220,13 @@ async  function turn(n) {
 }
 
 async  function turn1() {
+    let n = 0 ;
+    let artifact = document.getElementsByClassName("artefacto").item(n).innerHTML;
+    if (artifact !== "None"){
+        let source = document.getElementsByClassName("responsive-img").item(n).src;
+        collect(slot, source);
+        slot++;
+    }
     changeLocation(1)
     bienvenida()
     dayPass();
