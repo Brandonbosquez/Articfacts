@@ -54,4 +54,15 @@ If they manage to collect all the items, they win, if not, they loose.
 
 ## Quality Requirements
 
+The quality and experience of the user was the central point during the development of this application. Made sure that the game runs smoothly, the goals and functionalities of the game are explained in a comprehensible way, the visual and interactive elements are eye-catching and entertaining.
+
+### Technologies used:
+
+* SQL Database - Database created specifically for the game, storing all the necessary information for the game to run
+* Python - Backend - Server using Flask - Object oriented programming used for ease of development
+* HTML and CSS - Frontend - Webpage used for the UI
+* JavaScript - Middleman between Frontend and Backend
+
+
+
 
