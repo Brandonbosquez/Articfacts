@@ -8,11 +8,12 @@ Software 2: Procedural Programming Class TXL22S1 – B
 ## Introduction 
 
 The project of a flight game as a final project was assigned. In this document the functionalities and capabilities of the project are described. A detailed explanation of the user experience with the game can found, as well as possible paths for gameplay and user experience. 
-This is composed of 4 chapters: 
+This is composed of the following chapters: 
 *	Introduction 
 * [Vision](#vision)
 *	[Functional requirements](#functional-requirements)
 *	[Quality requirements](#quality-requirements)
+*	[Implementation](#implementation)
 
 ### Extra Information:
 The game's name is **ARTICFACTS**, this is a play on the words 
@@ -62,6 +63,10 @@ The quality and experience of the user was the central point during the developm
 * Python - Backend - Server using Flask - Object oriented programming used for ease of development
 * HTML and CSS - Frontend - Webpage used for the UI
 * JavaScript - Middleman between Frontend and Backend
+
+## Implementation
+
+This application's file are stored in this GitHub Repository.
 
 
 
