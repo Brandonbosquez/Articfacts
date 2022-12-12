@@ -14,6 +14,7 @@ This is composed of the following chapters:
 *	[Functional requirements](#functional-requirements)
 *	[Quality requirements](#quality-requirements)
 *	[Implementation](#implementation)
+*	[Index for files](#index)
 
 ### Extra Information:
 The game's name is **ARTICFACTS**, this is a play on the words 
@@ -71,6 +72,15 @@ This application's file are stored in this GitHub Repository.
 The repository is divided in folders, in the Python folder you can find the Python Programming, in the HTML folder you can find HTML-CSS-JavaScript
 
 The three main files are: server.py, game.js, game.html (**The game runs mainly on these files**)
+
+#### Index
+
+* python/server.py: in this python file you can find the backend of the game. The server using Flask framework runs here.
+* html/javascript/game.js : in this javascript you can find part of the frontend of the game. Here the communication between front and back is made using JSON fetch. The UI is made interactive with JavaScript.
+* html/game.html: here you can find the frontend and visual interactive UI
+* html/css/stylegame.css: here you can find the CSS file used to format the HTML file, adding visual elements.
+* database/artifacts.sql: in this sql file you find the database data.
+* html/img: in this folder you can find other folder used to give visual elements to the game
 
 
 
