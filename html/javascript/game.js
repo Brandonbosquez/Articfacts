@@ -105,6 +105,13 @@ async function getTown1(url){
     document.getElementsByClassName("descripcion").item(0).innerHTML = data.option1.description;
     document.getElementsByClassName("distance").item(0).innerHTML = data.option1.distance;
     document.getElementsByClassName("fuel").item(0).innerHTML = data.option1.fuel;
+    //let pos1 = ["lat": data.option1.lat, "long":data.option1.long];
+    const lat1 = data.option1.lat;
+    const long1 = data.option1.long;
+    document.getElementsByClassName("lat").item(0).innerHTML = lat1;
+    document.getElementsByClassName("long").item(0).innerHTML = long1;
+
+
     const marker = L.marker([data.option1.lat, data.option1.long], {icon: hielito}).addTo(map);
     marker.bindPopup(data.option1.town);
 
@@ -137,7 +144,12 @@ async function getTown1(url){
     document.getElementsByClassName("distance").item(1).innerHTML = data.option2.distance;
     document.getElementsByClassName("fuel").item(1).innerHTML = data.option2.fuel;
 
-    let pos2 = {"lat":data.option2.lat, "long":data.option2.long};
+    //let pos2 = ["lat":data.option2.lat, "long":data.option2.long];
+    const lat2 = data.option2.lat;
+    const long2 = data.option2.long;
+    document.getElementsByClassName("lat").item(1).innerHTML = lat2;
+    document.getElementsByClassName("long").item(1).innerHTML = long2;
+
     const marker2 = L.marker([data.option2.lat, data.option2.long], {icon: hielito}).addTo(map);
     marker2.bindPopup(data.option2.town);
 
@@ -171,7 +183,12 @@ async function getTown1(url){
     document.getElementsByClassName("distance").item(2).innerHTML = data.option3.distance;
     document.getElementsByClassName("fuel").item(2).innerHTML = data.option3.fuel;
 
-    let pos3 = {"lat":data.option3.lat, "long":data.option3.long};
+    //let pos3 = ["lat":data.option3.lat, "long":data.option3.long];
+    const lat3 = data.option3.lat;
+    const long3 = data.option3.long;
+    document.getElementsByClassName("lat").item(2).innerHTML = lat3;
+    document.getElementsByClassName("long").item(2).innerHTML = long3;
+
     const marker3 = L.marker([data.option3.lat, data.option3.long], {icon: hielito}).addTo(map);
     marker3.bindPopup(data.option3.town);
 
@@ -206,7 +223,12 @@ async function getTown1(url){
     document.getElementsByClassName("distance").item(3).innerHTML = data.option4.distance;
     document.getElementsByClassName("fuel").item(3).innerHTML = data.option4.fuel;
 
-    let pos4 = {"lat":data.option4.lat, "long":data.option4.long};
+    //let pos4 = ["lat":data.option4.lat, "long":data.option4.long];
+    const lat4 = data.option4.lat;
+    const long4 = data.option4.long;
+    document.getElementsByClassName("lat").item(3).innerHTML = lat4;
+    document.getElementsByClassName("long").item(3).innerHTML = long4;
+
     const marker4 = L.marker([data.option4.lat, data.option4.long], {icon: hielito}).addTo(map);
     marker4.bindPopup(data.option4.town);
     }
@@ -238,10 +260,12 @@ async function ganador(){
     if (metasAlcanzadas === 3){
         modalwin.setAttribute("class","modal active");
         overlay.setAttribute("class","active");
+        scoreboard(1);
     }
     else {
         modalloose.setAttribute("class","modal active");
         overlay.setAttribute("class","active");
+        scoreboard(0);
 
     }
 }
@@ -391,16 +415,27 @@ async function coleccionar(num){
     }
 }
 
-// FUNCIONES PARA REVISAR QUE LOS PARAMETROS NO SEAN NEGATIVOS:::
+// FUNCIÓN PARA ENVIAR SCOREBOARD -- CLASS
+async function scoreboard(num){
+    let n = num;
+    if (n == 0){
+        let object = {"score":score.innerHTML, "status":"LOSER", "goals": metasAlcanzadas, "location": currentLocation.innerHTML}
+        let json = JSON.stringify(object)
+        console.log(json)
+        let url = "http://127.0.0.1:5000/scoreboard/" + json;
+        const response = await fetch(url);
+        if (!response.ok) throw new Error('Invalid server input.');
+    }
 
-/*
-async function checkdays(){
-    let daysleft = document.getElementById(days);
-    if (daysleft.innerHTML === "0"){
-        console.log("THE EXHIBITION IS TODAY, TIME'S UP")
+    else {
+        let object = {"score":score.innerHTML, "status":"WINNER", "goals": metasAlcanzadas, "location": currentLocation.innerHTML}
+        let json = JSON.stringify(object)
+        console.log(json)
+        let url = "http://127.0.0.1:5000/scoreboard/" + json;
+        const response = await fetch(url);
+        if (!response.ok) throw new Error('Invalid server input.');
     }
 }
-*/
 
 
 
@@ -422,6 +457,10 @@ async  function turn1() {
     bienvenida();
     dayPass();
     //checkdays();
+    /*
+    let lat = document.getElementsByClassName("lat").item(n);
+    let long = document.getElementsByClassName("long").item(n);
+     */
     const url = 'http://127.0.0.1:5000/fouroptions';
     getTown1(url);
 }
@@ -432,6 +471,7 @@ async  function turn2() {
     changeLocation(n);
     bienvenida()
     dayPass();
+
     const url = 'http://127.0.0.1:5000/fouroptions';
     getTown1(url);
 
@@ -443,6 +483,7 @@ async  function turn3() {
     changeLocation(n);
     bienvenida()
     dayPass();
+
     const url = 'http://127.0.0.1:5000/fouroptions';
     getTown1(url);
 
@@ -454,6 +495,7 @@ async  function turn4() {
     changeLocation(n);
     bienvenida()
     dayPass();
+
     const url = 'http://127.0.0.1:5000/fouroptions';
     getTown1(url);
 }

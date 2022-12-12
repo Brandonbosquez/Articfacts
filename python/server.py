@@ -19,7 +19,7 @@ connection = mysql.connector.connect(
 options = 31
 
 class Player():
-    def __init__(self, username="None", location="Helsinki", score=0, status="LOOSER"):
+    def __init__(self, score=0, status="LOOSER", username="None", location="Helsinki"):
         self.username = username
         self.location = location
         self.score = score
@@ -42,6 +42,12 @@ class Player():
         self.ownpos()
         distancia = calculate_distance(self.pos, newpos)
         return distancia
+
+    def store(self):
+        sql = "UPDATE scoreboard SET status='"+self.status+"', score= "+ self.score +" WHERE id = (SELECT MAX(id)FROM scoreboard);"
+        cursor = connection.cursor()
+        cursor.execute(sql)
+        return print("YOU ARE A " + self.status)
 
 
 
@@ -121,6 +127,7 @@ current_location = start_location[1]
 
 
 def calculate_distance(other):
+    """
     sql = "select location from scoreboard order by id desc limit 1;"
     cursor = connection.cursor()
     cursor.execute(sql)
@@ -130,12 +137,13 @@ def calculate_distance(other):
     cursor = connection.cursor()
     cursor.execute(sql2)
     result2 = cursor.fetchall()
+    """
 
-    current_pos = [result2[0][0], result2[0][1]]
+    #current_pos = [result2[0][0], result2[0][1]]
 
-    distancia = int(distance.geodesic(current_pos, other).km)
-    print(distancia)
-    return distancia
+    #distancia = int(distance.geodesic(current_pos, other).km)
+    #print(distancia)
+    return print("hi")#distancia
 
 
 all_options = locations_available_function()
@@ -166,8 +174,10 @@ def store_name(name):
 
 @app.route('/fouroptions')
 def four_options():
+
     four_options = random.sample(all_options, 4)
 
+    #current = [float(lat),float(long)]
 
     #distance1 = calculate_distance([four_options[0][2][0], four_options[0][2][1]])
     #distance2 = calculate_distance([four_options[1][2][0], four_options[1][2][1]])
@@ -178,6 +188,11 @@ def four_options():
     distance2 = 2
     distance3 = 3
     distance4 = 4
+
+    #distance1 = int(distance.geodesic([four_options[0][2][0], four_options[0][2][1]],current).km)
+    #distance2 = int(distance.geodesic([four_options[1][2][0], four_options[1][2][1]],current).km)
+    #distance3 = int(distance.geodesic([four_options[2][2][0], four_options[2][2][1]],current).km)
+    #distance4 = int(distance.geodesic([four_options[3][2][0], four_options[3][2][1]],current).km)
 
     response1 = { "option1": {
             "town": four_options[0][0],
@@ -257,9 +272,27 @@ def remover(town):
             i[1][2] = "---"
             i[1][3] = "No artifact here!"
 
-            print(i[1][1])
-            print(i)
+            #print(i[1][1])
+            #print(i)
             return i
+
+@app.route('/scoreboard/<info>')
+def score(info):
+    resultado = json.loads(info)
+    print(resultado)
+    result = Player(resultado["score"], resultado["status"])
+    result.store()
+
+
+    return resultado
+
+
+
+
+
+
+
+
 
 #FINAL DEL CODIGO
 if __name__ == '__main__':
