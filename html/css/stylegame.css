@@ -352,3 +352,9 @@ footer div{
   opacity: 1;
   pointer-events: all;
 }
+#estrella{
+    display: inline-block;
+    width: 30%;
+    display: block;
+    margin: auto;
+}
