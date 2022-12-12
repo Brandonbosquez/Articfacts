@@ -173,7 +173,7 @@ def store_name(name):
 
 
 @app.route('/fouroptions')
-def four_options():
+def four_options(pos = [60.3172, 24.963301]):
 
     four_options = random.sample(all_options, 4)
 
@@ -184,15 +184,15 @@ def four_options():
     #distance3 = calculate_distance([four_options[2][2][0], four_options[2][2][1]])
     #distance4 = calculate_distance([four_options[3][2][0], four_options[3][2][1]])
 
-    distance1 = 1
-    distance2 = 2
-    distance3 = 3
-    distance4 = 4
+    #distance1 = 1
+    #distance2 = 2
+    #distance3 = 3
+    #distance4 = 4
 
-    #distance1 = int(distance.geodesic([four_options[0][2][0], four_options[0][2][1]],current).km)
-    #distance2 = int(distance.geodesic([four_options[1][2][0], four_options[1][2][1]],current).km)
-    #distance3 = int(distance.geodesic([four_options[2][2][0], four_options[2][2][1]],current).km)
-    #distance4 = int(distance.geodesic([four_options[3][2][0], four_options[3][2][1]],current).km)
+    distance1 = int(distance.geodesic( [four_options[0][2][0], four_options[0][2][1]], pos).km)
+    distance2 = int(distance.geodesic( [four_options[1][2][0], four_options[1][2][1]], pos).km)
+    distance3 = int(distance.geodesic( [four_options[2][2][0], four_options[2][2][1]], pos).km)
+    distance4 = int(distance.geodesic( [four_options[3][2][0], four_options[3][2][1]], pos).km)
 
     response1 = { "option1": {
             "town": four_options[0][0],

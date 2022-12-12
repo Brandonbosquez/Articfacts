@@ -105,6 +105,7 @@ async function getTown1(url){
     document.getElementsByClassName("descripcion").item(0).innerHTML = data.option1.description;
     document.getElementsByClassName("distance").item(0).innerHTML = data.option1.distance;
     document.getElementsByClassName("fuel").item(0).innerHTML = data.option1.fuel;
+
     //let pos1 = ["lat": data.option1.lat, "long":data.option1.long];
     const lat1 = data.option1.lat;
     const long1 = data.option1.long;
