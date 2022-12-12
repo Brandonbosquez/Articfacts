@@ -67,6 +67,10 @@ The quality and experience of the user was the central point during the developm
 ## Implementation
 
 This application's file are stored in this GitHub Repository.
+### For evaluation:
+The repository is divided in folders, in the Python folder you can find the Python Programming, in the HTML folder you can find HTML-CSS-JavaScript
+
+The three main files are: server.py, game.js, game.html (**The game runs mainly on these files**)
 
 
 
