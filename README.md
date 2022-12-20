@@ -79,7 +79,7 @@ The three main files are: server.py, game.js, game.html (**The game runs mainly 
 * html/javascript/game.js : in this javascript you can find part of the frontend of the game. Here the communication between front and back is made using JSON fetch. The UI is made interactive with JavaScript.
 * html/game.html: here you can find the frontend and visual interactive UI
 * html/css/stylegame.css: here you can find the CSS file used to format the HTML file, adding visual elements.
-* database/artifacts.sql: in this sql file you find the database data.
+* database/artifacts_vf.sql: in this sql file you find the database data.
 * html/img: in this folder you can find other folder used to give visual elements to the game
 
 
